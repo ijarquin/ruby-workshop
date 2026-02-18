@@ -6,7 +6,7 @@ class RecipesControllerTest < ActionDispatch::IntegrationTest
   end
 
   test("should get index") do
-    get recipes_url, as: :json
+    get api_v1_recipes_url, as: :json
     assert_response :success
   end
 end

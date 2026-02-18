@@ -75,7 +75,7 @@ json_data.each_slice(BATCH_SIZE).with_index do |recipe_batch, index|
     # 4. Bulk insert/update all unique ingredients for the batch
     puts("Upserting #{all_ingredient_names.length} unique ingredients...")
     ingredients_to_create = all_ingredient_names.map do |name|
-      {name: name, created_at: now, updated_at: now}
+      { name: name, created_at: now, updated_at: now }
     end
 
     Ingredient.upsert_all(ingredients_to_create, unique_by: :name)
