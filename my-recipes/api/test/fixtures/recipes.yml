@@ -1,7 +1,7 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  title: MyString
+  title: MyFirstRecipe
   cook_time: 1
   prep_time: 1
   ratings: 1.5
@@ -11,7 +11,7 @@ one:
   image: MyString
 
 two:
-  title: MyString
+  title: MySecondRecipe
   cook_time: 1
   prep_time: 1
   ratings: 1.5
