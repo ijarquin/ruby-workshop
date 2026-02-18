@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_02_18_124954) do
+ActiveRecord::Schema[8.1].define(version: 2026_02_18_145439) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -41,6 +41,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_02_18_124954) do
     t.float "ratings"
     t.string "title"
     t.datetime "updated_at", null: false
+    t.index ["title"], name: "index_recipes_on_title", unique: true
   end
 
   add_foreign_key "recipe_ingredients", "ingredients"
