@@ -5,7 +5,7 @@ module Api
       def index
         @recipes = Recipe.all
 
-        render(json: @recipes)
+        render(json: {recipes: @recipes})
       end
     end
   end
