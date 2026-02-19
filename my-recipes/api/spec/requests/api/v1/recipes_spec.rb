@@ -4,6 +4,7 @@ RSpec.describe "Api::V1::Recipes", type: :request do
   let!(:flour) { Ingredient.create!(name: "flour") }
   let!(:sugar) { Ingredient.create!(name: "sugar") }
   let!(:eggs) { Ingredient.create!(name: "eggs") }
+  let!(:butter) { Ingredient.create!(name: "butter") }
 
   # Recipe 1: Flour + Sugar (Matches if querying flour+sugar)
   let!(:simple_cake) do
@@ -16,6 +17,13 @@ RSpec.describe "Api::V1::Recipes", type: :request do
   let!(:rich_cake) do
     r = Recipe.create!(title: "Rich Cake", cook_time: 45, prep_time: 20, ratings: 4.8)
     r.ingredients << [flour, sugar, eggs]
+    r
+  end
+
+  # Recipe 3: Flour + Butter (Mismatch if querying flour+sugar)
+  let!(:butter_cookie) do
+    r = Recipe.create!(title: "Butter Cookie", cook_time: 20, prep_time: 10, ratings: 4.0)
+    r.ingredients << [flour, butter]
     r
   end
 
