@@ -74,6 +74,17 @@ RSpec.describe "Api::V1::Recipes", type: :request do
 
         expect(recipes.size).to(eq(0))
       end
+
+      it "returns recipes matching partial ingredient names" do
+        get("/api/v1/recipes", params: {ingredients: ["flou", "sug"]})
+        json = JSON.parse(response.body)
+        recipes = json["recipes"]
+        titles = recipes.map { |r| r["title"] }
+
+        expect(recipes.size).to(eq(2))
+        expect(titles).to(include("Simple Cake", "Rich Cake"))
+        expect(titles).not_to(include("Butter Cookie"))
+      end
     end
   end
 end
