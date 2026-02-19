@@ -29,24 +29,34 @@ RSpec.describe "Api::V1::Recipes", type: :request do
 
   describe "GET /api/v1/recipes" do
     context("when searching by ingredients") do
-      it "returns recipes containing all the requested ingredients" do
+      before do
         get("/api/v1/recipes", params: {ingredients: ["flour", "sugar"]})
-
-        expect(response).to(have_http_status(:success))
         json = JSON.parse(response.body)
-        recipes = json["recipes"]
+        @recipes = json["recipes"]
+      end
 
-        expect(recipes.size).to(eq(2))
-        titles = recipes.map { |r| r["title"] }
+      it "returns a success response" do
+        expect(response).to(have_http_status(:success))
+      end
 
+      it "returns recipes containing all the requested ingredients" do
+        titles = @recipes.map { |r| r["title"] }
+
+        expect(@recipes.size).to(eq(2))
         expect(titles).to(include("Simple Cake", "Rich Cake"))
 
-        simple_cake_json = recipes.find { |r| r["title"] == "Simple Cake" }
+        simple_cake_json = @recipes.find { |r| r["title"] == "Simple Cake" }
+
         expect(simple_cake_json).to(have_key("ingredients"))
         expect(simple_cake_json["ingredients"]).to(be_an(Array))
         expect(simple_cake_json["ingredients"].first).to(have_key("id"))
         expect(simple_cake_json["ingredients"].first).to(have_key("name"))
         expect(simple_cake_json["ingredients"].first.keys).to(contain_exactly("id", "name"))
+      end
+
+      it "does not return recipes where at least one ingredient does not match" do
+        titles = @recipes.map { |r| r["title"] }
+        expect(titles).not_to(include("Butter Cookie"))
       end
     end
   end
