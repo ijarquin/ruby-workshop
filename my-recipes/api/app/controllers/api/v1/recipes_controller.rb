@@ -14,6 +14,7 @@ module Api
       private
 
       def recipes_with_matching_ingredients(ingredients)
+        # produces just a list of matching recipe IDs (no extra columns in the SELECT that would upset PostgreSQL's GROUP BY rules
         matching_ids = Recipe
           .joins(:ingredients)
           .where(ingredients: {name: ingredients})
@@ -21,6 +22,7 @@ module Api
           .having("COUNT(DISTINCT ingredients.id) = ?", ingredients.size)
           .pluck(:id)
 
+        # loads those recipes with their full ingredients association for serializatio
         Recipe.includes(:ingredients).where(id: matching_ids)
       end
     end
