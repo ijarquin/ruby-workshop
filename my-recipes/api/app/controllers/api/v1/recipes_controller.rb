@@ -9,7 +9,7 @@ module Api
         ingredients = Array(raw_ingredients).map(&:to_s).map(&:strip).reject(&:blank?).uniq.sort
         recipes = RecipesSearchService.new(ingredients)
 
-        render(json: {recipes: RecipeBlueprint.render_as_hash(recipes.with_matching_ingredients)})
+        render(json: { recipes: RecipeBlueprint.render_as_hash(recipes.with_matching_ingredients) })
       end
     end
   end
