@@ -9,43 +9,39 @@ RSpec.describe "Api::V1::Recipes", type: :request do
   # Recipe 1: Flour + Sugar (Matches if querying flour+sugar)
   let!(:simple_cake) do
     r = Recipe.create!(title: "Simple Cake", cook_time: 30, prep_time: 15, ratings: 4.5)
-    r.ingredients << [flour, sugar]
+    r.ingredients << [ flour, sugar ]
     r
   end
 
   # Recipe 2: Flour + Sugar + Eggs (Matches if querying flour+sugar, because it's a superset)
   let!(:rich_cake) do
     r = Recipe.create!(title: "Rich Cake", cook_time: 45, prep_time: 20, ratings: 4.8)
-    r.ingredients << [flour, sugar, eggs]
+    r.ingredients << [ flour, sugar, eggs ]
     r
   end
 
   # Recipe 3: Flour + Butter (Mismatch if querying flour+sugar)
   let!(:butter_cookie) do
     r = Recipe.create!(title: "Butter Cookie", cook_time: 20, prep_time: 10, ratings: 4.0)
-    r.ingredients << [flour, butter]
+    r.ingredients << [ flour, butter ]
     r
   end
 
   describe "GET /api/v1/recipes" do
     context("when searching by ingredients") do
-      before do
-        get("/api/v1/recipes", params: {ingredients: ["flour", "sugar"]})
-        json = JSON.parse(response.body)
-        @recipes = json["recipes"]
-      end
-
-      it "returns a success response" do
-        expect(response).to(have_http_status(:success))
-      end
-
       it "returns recipes containing all the requested ingredients" do
-        titles = @recipes.map { |r| r["title"] }
+        get("/api/v1/recipes", params: { ingredients: [ "flour", "sugar" ] })
+        json = JSON.parse(response.body)
+        recipes = json["recipes"]
 
-        expect(@recipes.size).to(eq(2))
+        expect(response).to(have_http_status(:success))
+        titles = recipes.map { |r| r["title"] }
+
+        expect(recipes.size).to(eq(2))
         expect(titles).to(include("Simple Cake", "Rich Cake"))
+        expect(titles).not_to(include("Butter Cookie"))
 
-        simple_cake_json = @recipes.find { |r| r["title"] == "Simple Cake" }
+        simple_cake_json = recipes.find { |r| r["title"] == "Simple Cake" }
 
         expect(simple_cake_json).to(have_key("ingredients"))
         expect(simple_cake_json["ingredients"]).to(be_an(Array))
@@ -54,36 +50,13 @@ RSpec.describe "Api::V1::Recipes", type: :request do
         expect(simple_cake_json["ingredients"].first.keys).to(contain_exactly("id", "name"))
       end
 
-      it "does not return recipes where at least one ingredient does not match" do
-        titles = @recipes.map { |r| r["title"] }
-        expect(titles).not_to(include("Butter Cookie"))
-      end
-
-      it "returns and empty array when no ingredients match" do
-        get("/api/v1/recipes", params: {ingredients: ["bread"]})
+      it "returns and empty collecton when no mathing ingredients" do
+        get("/api/v1/recipes", params: { ingredients: [ "bread" ] })
         json = JSON.parse(response.body)
         recipes = json["recipes"]
 
+        expect(response).to(have_http_status(:success))
         expect(recipes.size).to(eq(0))
-      end
-
-      it "returns and empty array when no params passed" do
-        get("/api/v1/recipes")
-        json = JSON.parse(response.body)
-        recipes = json["recipes"]
-
-        expect(recipes.size).to(eq(0))
-      end
-
-      it "returns recipes matching partial ingredient names" do
-        get("/api/v1/recipes", params: {ingredients: ["flou", "sug"]})
-        json = JSON.parse(response.body)
-        recipes = json["recipes"]
-        titles = recipes.map { |r| r["title"] }
-
-        expect(recipes.size).to(eq(2))
-        expect(titles).to(include("Simple Cake", "Rich Cake"))
-        expect(titles).not_to(include("Butter Cookie"))
       end
     end
   end

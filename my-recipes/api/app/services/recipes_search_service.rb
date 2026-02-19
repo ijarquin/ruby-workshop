@@ -4,7 +4,7 @@ class RecipesSearchService
   end
 
   def with_matching_ingredients
-    return Recipe.none if @ingredients.empty?
+    return Recipe.none if ingredients.empty?
 
     Recipe.includes(:ingredients).where(id: scope_matching_all_terms.select(:id))
   end
