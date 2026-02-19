@@ -72,3 +72,8 @@ test framework to write api and unit tests. The Rails API follows a standard con
     Clone the repository: git clone https://github.com/pennylane-hiring/ijarquin
     cd my-recipes
     execute: docke compose up
+
+### Running the tests
+
+    api: cd into the api folder and run `bundle exec rspec`
+    web: UPCOMING (TODO)
