@@ -21,6 +21,22 @@ services:
         ./bin/rails s -b 0.0.0.0
       "
 
+  web:
+    build:
+      context: ./web
+      dockerfile: Dockerfile.dev
+    ports:
+      - "3001:3000"
+    volumes:
+      - ./web:/app
+      - /app/node_modules
+    environment:
+      - NEXT_PUBLIC_API_URL=http://localhost:3000/api
+      - NODE_ENV=development
+    command: npm run dev
+    depends_on:
+      - api
+
   db:
     image: postgres:15-alpine
     volumes:
