@@ -6,7 +6,9 @@ class RecipesSearchService
   def with_matching_ingredients
     return Recipe.none if ingredients.empty?
 
-    Recipe.includes(:ingredients).where(id: scope_matching_all_terms.select(:id))
+    Recipe.includes(:ingredients)
+          .where(id: scope_matching_all_terms.select(:id))
+          .order(Arel.sql("(SELECT COUNT(*) FROM recipe_ingredients WHERE recipe_id = recipes.id) ASC"))
   end
 
   private
