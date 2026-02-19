@@ -14,16 +14,19 @@ module Api
       private
 
       def recipes_with_matching_ingredients(ingredients)
-        # produces just a list of matching recipe IDs (no extra columns in the SELECT that would upset PostgreSQL's GROUP BY rules
-        matching_ids = Recipe
-          .joins(:ingredients)
-          .where(ingredients: {name: ingredients})
-          .group("recipes.id")
-          .having("COUNT(DISTINCT ingredients.id) = ?", ingredients.size)
-          .pluck(:id)
+        return Recipe.none if ingredients.empty?
 
-        # loads those recipes with their full ingredients association for serializatio
-        Recipe.includes(:ingredients).where(id: matching_ids)
+        # Each term adds an EXISTS clause, so every term must match at least one ingredient in the recipe
+        scope = ingredients.reduce(Recipe.all) do |s, term|
+          s.where(
+            "EXISTS (SELECT 1 FROM recipe_ingredients ri
+                     JOIN ingredients i ON i.id = ri.ingredient_id
+                     WHERE ri.recipe_id = recipes.id
+                     AND i.name ILIKE ?)", "%#{term}%"
+          )
+        end
+
+        Recipe.includes(:ingredients).where(id: scope.select(:id))
       end
     end
   end
