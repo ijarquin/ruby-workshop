@@ -58,6 +58,22 @@ RSpec.describe "Api::V1::Recipes", type: :request do
         titles = @recipes.map { |r| r["title"] }
         expect(titles).not_to(include("Butter Cookie"))
       end
+
+      it "returns and empty array when no ingredients match" do
+        get("/api/v1/recipes", params: {ingredients: ["bread"]})
+        json = JSON.parse(response.body)
+        recipes = json["recipes"]
+
+        expect(recipes.size).to(eq(0))
+      end
+
+      it "returns and empty array when no params passed" do
+        get("/api/v1/recipes")
+        json = JSON.parse(response.body)
+        recipes = json["recipes"]
+
+        expect(recipes.size).to(eq(0))
+      end
     end
   end
 end
