@@ -75,6 +75,16 @@ RSpec.describe RecipesSearchService, type: :model do
       end
     end
 
+    context "when ordering by closeness of match" do
+      let(:ingredients) { [ "flour", "sugar" ] }
+
+      it "returns recipes with fewer extra ingredients first" do
+        # simple_cake has 2 ingredients (exact match), rich_cake has 3 (1 extra)
+        expect(results.first).to(eq(simple_cake))
+        expect(results.last).to(eq(rich_cake))
+      end
+    end
+
     context "when no ingredient matches" do
       let(:ingredients) { [ "bread" ] }
 
