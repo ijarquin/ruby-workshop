@@ -1,6 +1,16 @@
+"use client";
+
 import Link from "next/link";
+import SearchBar from "../components/SearchBar";
+import React, { useState } from "react";
 
 export default function Home() {
+  const [ingredients, setIngredients] = useState<string[]>([]);
+
+  const handleSearch = (newIngredients: string[]) => {
+    setIngredients(newIngredients);
+  };
+
   return (
     <div className="min-h-screen bg-stone-50 flex flex-col">
       <header>
@@ -50,6 +60,10 @@ export default function Home() {
             Find and share the best recipes from around the world. From comfort
             food to healthy bites, we have it all.
           </p>
+
+          <div className="flex justify-center mb-8">
+            <SearchBar onSearch={handleSearch} />
+          </div>
         </div>
       </main>
 
