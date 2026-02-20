@@ -1,7 +1,18 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  /* config options here */
+  images: {
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'imagesvc.meredithcorp.io',
+      },
+      {
+        protocol: 'https',
+        hostname: 'www.allrecipes.com',
+      },
+    ],
+  },
 };
 
 export default nextConfig;
