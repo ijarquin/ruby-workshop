@@ -2,13 +2,14 @@
 
 import Link from "next/link";
 import SearchBar from "../components/SearchBar";
-import React, { useState } from "react";
+import React, { useState, useMemo } from "react";
 import { useRecipes } from "../hooks/useRecipes";
 
 export default function Home() {
   const [ingredients, setIngredients] = useState<string[]>([]);
 
   const { data, isLoading, isError } = useRecipes(ingredients);
+  const recipes = useMemo(() => data?.recipes ?? [], [data?.recipes]);
 
   const handleSearch = (newIngredients: string[]) => {
     setIngredients(newIngredients);
@@ -67,6 +68,31 @@ export default function Home() {
           <div className="flex justify-center mb-8">
             <SearchBar onSearch={handleSearch} />
           </div>
+        </div>
+
+        {/* Recipe Grid */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10">
+          {isLoading ? (
+            "Loading..."
+          ) : isError ? (
+            <div className="col-span-full text-center py-12">
+              <p className="text-xl font-serif text-red-500">
+                Error loading recipes. Please try again later.
+              </p>
+            </div>
+          ) : recipes.length > 0 ? (
+            recipes.map((recipe) => (
+              <React.Fragment key={recipe.id}>
+                <p className="text-xl font-serif text-black">{recipe.title}</p>
+              </React.Fragment>
+            ))
+          ) : (
+            <div className="col-span-full text-center py-12">
+              <p className="text-xl font-serif text-stone-500">
+                No recipes found matching your criteria.
+              </p>
+            </div>
+          )}
         </div>
       </main>
 
