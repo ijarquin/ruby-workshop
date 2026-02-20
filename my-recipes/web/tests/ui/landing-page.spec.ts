@@ -27,6 +27,16 @@ test.describe('Main content', () => {
   });
 });
 
+test.describe('Ingredient search', () => {
+  test('displays the ingredient input', async ({ page }) => {
+    await expect(page.getByPlaceholder('Add an ingredient (e.g. Chicken)...')).toBeVisible();
+  });
+
+  test('displays the add ingredient button', async ({ page }) => {
+    await expect(page.getByRole('button', { name: /add ingredient/i })).toBeVisible();
+  });
+});
+
 test.describe('Footer', () => {
   test('displays the footer', async ({ page }) => {
     await expect(page.getByRole('contentinfo')).toBeVisible();
