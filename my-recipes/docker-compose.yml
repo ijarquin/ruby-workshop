@@ -31,7 +31,7 @@ services:
       - ./web:/app
       - /app/node_modules
     environment:
-      - NEXT_PUBLIC_API_URL=http://localhost:3000/api
+      - NEXT_PUBLIC_API_URL=http://localhost:3000/api/v1
       - NODE_ENV=development
     command: npm run dev
     depends_on:
