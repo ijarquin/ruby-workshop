@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import SearchBar from "../components/SearchBar";
+import RecipeCard from "../components/RecipeCard";
 import React, { useState, useMemo } from "react";
 import { useRecipes } from "../hooks/useRecipes";
 
@@ -83,7 +84,11 @@ export default function Home() {
           ) : recipes.length > 0 ? (
             recipes.map((recipe) => (
               <React.Fragment key={recipe.id}>
-                <p className="text-xl font-serif text-black">{recipe.title}</p>
+                <RecipeCard
+                  title={recipe.title}
+                  imageURL={recipe.image}
+                  category={recipe.category || recipe.cuisine || "Unknown"}
+                />
               </React.Fragment>
             ))
           ) : (
