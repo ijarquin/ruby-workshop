@@ -3,9 +3,12 @@
 import Link from "next/link";
 import SearchBar from "../components/SearchBar";
 import React, { useState } from "react";
+import { useRecipes } from "../hooks/useRecipes";
 
 export default function Home() {
   const [ingredients, setIngredients] = useState<string[]>([]);
+
+  const { data, isLoading, isError } = useRecipes(ingredients);
 
   const handleSearch = (newIngredients: string[]) => {
     setIngredients(newIngredients);
