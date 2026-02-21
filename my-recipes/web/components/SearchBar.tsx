@@ -4,10 +4,11 @@ import { useState } from "react";
 
 interface SearchBarProps {
   onSearch: (ingredients: string[]) => void;
+  initialIngredients?: string[];
 }
 
-export default function SearchBar({ onSearch }: SearchBarProps) {
-  const [ingredients, setIngredients] = useState<string[]>([]);
+export default function SearchBar({ onSearch, initialIngredients = [] }: SearchBarProps) {
+  const [ingredients, setIngredients] = useState<string[]>(initialIngredients);
   const [inputValue, setInputValue] = useState("");
 
   const handleAddIngredient = (e: React.FormEvent) => {
