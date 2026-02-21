@@ -1,4 +1,9 @@
+"use client";
+
 import Image from "next/image";
+import { useState } from "react";
+
+const DEFAULT_IMAGE = "/default-recipe.jpeg";
 
 interface RecipeCardProps {
   title: string;
@@ -15,6 +20,8 @@ export default function RecipeCard({
   onClick,
   isSelected,
 }: RecipeCardProps) {
+  const [imgSrc, setImgSrc] = useState(imageURL);
+
   return (
     <div
       onClick={onClick}
@@ -22,11 +29,12 @@ export default function RecipeCard({
     >
       <div className="relative h-56 overflow-hidden">
         <Image
-          src={imageURL}
+          src={imgSrc}
           alt={title}
           fill
           sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
           className="object-cover transition-transform duration-500 group-hover:scale-[1.03]"
+          onError={() => setImgSrc(DEFAULT_IMAGE)}
         />
 
         {/* Category badge */}
