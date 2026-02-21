@@ -1,3 +1,4 @@
+import { useEffect, useRef } from "react";
 import { Recipe } from "../hooks/useRecipes";
 
 interface RecipeDetailPanelProps {
@@ -9,6 +10,16 @@ export default function RecipeDetailPanel({
   recipe,
   onClose,
 }: RecipeDetailPanelProps) {
+  const titleRef = useRef<HTMLHeadingElement>(null);
+
+  useEffect(() => {
+    const trigger = document.activeElement as HTMLElement | null;
+    titleRef.current?.focus();
+    return () => {
+      trigger?.focus();
+    };
+  }, []);
+
   // Split ingredients into two columns approximately
   const half = Math.ceil(recipe.ingredients.length / 2);
   const firstColIngredients = recipe.ingredients.slice(0, half);
@@ -41,7 +52,11 @@ export default function RecipeDetailPanel({
         {/* Column 1: Recipe Details */}
         <div className="md:col-span-1 space-y-4">
           <div>
-            <h3 className="text-2xl font-serif font-bold text-stone-900">
+            <h3
+              ref={titleRef}
+              tabIndex={0}
+              className="text-2xl font-serif font-bold text-stone-900 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-700 focus-visible:rounded-sm"
+            >
               {recipe.title}
             </h3>
             {recipe.author && (
@@ -51,7 +66,7 @@ export default function RecipeDetailPanel({
             )}
           </div>
 
-          <div className="space-y-2 text-sm text-stone-700">
+          <div tabIndex={0} className="space-y-2 text-sm text-stone-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-700 focus-visible:rounded-sm">
             <div className="flex justify-between border-b border-stone-200 pb-2">
               <span className="font-semibold">Category:</span>
               <span>{recipe.category || recipe.cuisine || "N/A"}</span>
@@ -87,7 +102,7 @@ export default function RecipeDetailPanel({
         </div>
 
         {/* Column 2 & 3: Ingredients */}
-        <div className="md:col-span-2">
+        <div tabIndex={0} className="md:col-span-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-700 focus-visible:rounded-sm">
           <h4 className="text-lg font-serif font-bold text-stone-900 mb-4 border-b border-stone-200 pb-2">
             Ingredients
           </h4>

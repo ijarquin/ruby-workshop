@@ -8,6 +8,7 @@ function SeasoningIcon() {
       strokeWidth="2.5"
       strokeLinecap="round"
       strokeLinejoin="round"
+      aria-hidden="true"
     >
       <path d="M20 30 Q30 24 40 30 Q50 36 60 30" />
       <path d="M20 43 Q30 37 40 43 Q50 49 60 43" />
@@ -26,6 +27,7 @@ function ClockIcon() {
       strokeWidth="2.5"
       strokeLinecap="round"
       strokeLinejoin="round"
+      aria-hidden="true"
     >
       <circle cx="40" cy="40" r="25" />
       <line x1="40" y1="18" x2="40" y2="40" />
@@ -45,6 +47,7 @@ function ChecklistIcon() {
       strokeWidth="2.5"
       strokeLinecap="round"
       strokeLinejoin="round"
+      aria-hidden="true"
     >
       <rect x="18" y="12" width="44" height="56" rx="4" />
       <polyline points="26,28 31,34 40,22" />
@@ -67,6 +70,7 @@ function SpoonIcon() {
       strokeWidth="2.5"
       strokeLinecap="round"
       strokeLinejoin="round"
+      aria-hidden="true"
     >
       <ellipse cx="40" cy="24" rx="13" ry="15" />
       <path d="M40 39 Q44 55 40 70" />
@@ -84,6 +88,7 @@ function WaterDropIcon() {
       strokeWidth="2.5"
       strokeLinecap="round"
       strokeLinejoin="round"
+      aria-hidden="true"
     >
       <path d="M40 12 C40 12 18 40 18 53 C18 65 28 72 40 72 C52 72 62 65 62 53 C62 40 40 12 40 12 Z" />
     </svg>
@@ -100,6 +105,7 @@ function FlameIcon() {
       strokeWidth="2.5"
       strokeLinecap="round"
       strokeLinejoin="round"
+      aria-hidden="true"
     >
       <path d="M40 68 C26 68 16 58 16 46 C16 34 24 26 27 18 C28 30 35 34 35 34 C34 24 41 12 41 12 C50 24 60 35 60 46 C60 58 54 68 40 68 Z" />
     </svg>
@@ -116,6 +122,7 @@ function LeafIcon() {
       strokeWidth="2.5"
       strokeLinecap="round"
       strokeLinejoin="round"
+      aria-hidden="true"
     >
       <path d="M16 64 C16 64 20 36 38 24 C52 15 65 22 65 22 C65 22 60 50 42 60 C30 66 16 64 16 64 Z" />
       <line x1="16" y1="64" x2="52" y2="34" />
@@ -133,6 +140,7 @@ function KnifeIcon() {
       strokeWidth="2.5"
       strokeLinecap="round"
       strokeLinejoin="round"
+      aria-hidden="true"
     >
       <path d="M18 62 L58 16 L62 20 L22 66 Z" />
       <path d="M10 68 L18 62 L22 66 L14 74 Z" />
@@ -150,6 +158,7 @@ function PanIcon() {
       strokeWidth="2.5"
       strokeLinecap="round"
       strokeLinejoin="round"
+      aria-hidden="true"
     >
       <path d="M14 52 C14 40 26 34 40 34 C54 34 66 40 66 52 C66 62 54 68 40 68 C26 68 14 62 14 52 Z" />
       <path d="M66 50 L78 44" />
@@ -244,10 +253,10 @@ export default function KitchenTipsGrid() {
             </div>
           </div>
           <div className="p-4 bg-white">
-            <h3 className="text-base font-serif font-bold text-stone-900 leading-snug">
+            <h3 tabIndex={0} className="text-base font-serif font-bold text-stone-900 leading-snug focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-700 focus-visible:rounded-sm">
               {title}
             </h3>
-            <p className="text-sm text-stone-500 mt-1 leading-relaxed">
+            <p tabIndex={0} className="text-sm text-stone-500 mt-1 leading-relaxed focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-700 focus-visible:rounded-sm">
               {description}
             </p>
           </div>
