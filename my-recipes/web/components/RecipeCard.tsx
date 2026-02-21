@@ -50,8 +50,16 @@ export default function RecipeCard({
 
   return (
     <div
+      role="button"
+      tabIndex={0}
       onClick={onClick}
-      className={`group overflow-hidden rounded-md shadow-sm hover:shadow-md transition-shadow duration-300 cursor-pointer border ${isSelected ? "border-amber-700 ring-1 ring-amber-700" : "border-stone-200"}`}
+      onKeyDown={(e) => {
+        if (e.key === "Enter" || e.key === " ") {
+          e.preventDefault();
+          onClick?.();
+        }
+      }}
+      className={`group overflow-hidden rounded-md shadow-sm hover:shadow-md transition-shadow duration-300 cursor-pointer border focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-700 focus-visible:ring-offset-2 ${isSelected ? "border-amber-700 ring-1 ring-amber-700" : "border-stone-200"}`}
     >
       <div className="relative h-56 overflow-hidden">
         {imgError ? (

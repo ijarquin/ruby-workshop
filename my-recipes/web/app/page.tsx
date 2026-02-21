@@ -95,10 +95,10 @@ export default function Home() {
       <main className="grow max-w-6xl mx-auto px-6 sm:px-8 lg:px-12 py-12 w-full">
         {/* Hero / Header Section */}
         <div className="text-center mb-16">
-          <h1 className="text-4xl sm:text-5xl font-serif font-bold text-stone-900 mb-4 tracking-tight">
+          <h1 tabIndex={0} className="text-4xl sm:text-5xl font-serif font-bold text-stone-900 mb-4 tracking-tight focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-700 focus-visible:rounded-sm">
             Discover Delicious <span className="text-amber-700">Recipes</span>
           </h1>
-          <p className="text-lg text-stone-500 leading-relaxed mb-10 max-w-2xl mx-auto">
+          <p tabIndex={0} className="text-lg text-stone-500 leading-relaxed mb-10 max-w-2xl mx-auto focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-700 focus-visible:rounded-sm">
             Find and share the best recipes from around the world. From comfort
             food to healthy bites, we have it all.
           </p>
