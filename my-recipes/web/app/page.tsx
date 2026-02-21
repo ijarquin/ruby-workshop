@@ -7,13 +7,19 @@ import React, { useState, useMemo } from "react";
 import { useRecipes } from "../hooks/useRecipes";
 import useWindowSize from "../hooks/useWindowSize";
 import RecipeDetailPanel from "../components/RecipeDetailsPanel";
+import Pagination from "../components/Pagination";
 
 export default function Home() {
   const [ingredients, setIngredients] = useState<string[]>([]);
   const [expandedRecipeId, setExpandedRecipeId] = useState<number | null>(null);
+  const [currentPage, setCurrentPage] = useState(1);
 
   const { data, isLoading, isError } = useRecipes(ingredients);
   const recipes = useMemo(() => data?.recipes ?? [], [data?.recipes]);
+
+  const PAGE_SIZE = 9;
+  const getTotalPages = () => Math.ceil(recipes.length / PAGE_SIZE);
+  const paginatedRecipes = recipes.slice((currentPage - 1) * PAGE_SIZE, currentPage * PAGE_SIZE);
 
   const handleSearch = (newIngredients: string[]) => {
     setIngredients(newIngredients);
@@ -26,17 +32,17 @@ export default function Home() {
   // Calculate insertion index for the details panel
   const { width } = useWindowSize();
   const numColumns = width ? (width >= 1024 ? 3 : width >= 640 ? 2 : 1) : 3;
-  const expandedIndex = recipes.findIndex((r) => r.id === expandedRecipeId);
+  const expandedIndex = paginatedRecipes.findIndex((r) => r.id === expandedRecipeId);
   let insertionIndex = -1;
   if (expandedIndex !== -1) {
     const rowStartIndex = Math.floor(expandedIndex / numColumns) * numColumns;
     insertionIndex = Math.min(
       rowStartIndex + numColumns - 1,
-      recipes.length - 1,
+      paginatedRecipes.length - 1,
     );
   }
 
-  const expandedRecipe = recipes.find((r) => r.id === expandedRecipeId);
+  const expandedRecipe = paginatedRecipes.find((r) => r.id === expandedRecipeId);
 
   return (
     <div className="min-h-screen bg-stone-50 flex flex-col">
@@ -103,8 +109,8 @@ export default function Home() {
                 Error loading recipes. Please try again later.
               </p>
             </div>
-          ) : recipes.length > 0 ? (
-            recipes.map((recipe, index) => (
+          ) : paginatedRecipes.length > 0 ? (
+            paginatedRecipes.map((recipe, index) => (
               <React.Fragment key={recipe.id}>
                 <RecipeCard
                   title={recipe.title}
@@ -131,6 +137,18 @@ export default function Home() {
             </div>
           )}
         </div>
+
+        {/* Pagination */}
+        {!isLoading && !isError && recipes.length > 0 && (
+          <Pagination
+            currentPage={currentPage}
+            totalPages={getTotalPages()}
+            onPageChange={(page) => {
+              setCurrentPage(page);
+              setExpandedRecipeId(null);
+            }}
+          />
+        )}
       </main>
 
       <footer className="bg-stone-100 border-t border-stone-200 py-10 mt-auto">
