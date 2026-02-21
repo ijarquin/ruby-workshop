@@ -18,7 +18,7 @@ export default function Pagination({
         disabled={currentPage === 1}
         className={`px-4 py-2 border rounded-md text-sm font-medium transition-colors flex items-center gap-1 ${currentPage === 1
             ? "border-stone-200 text-stone-400 cursor-not-allowed bg-stone-100"
-            : "border-stone-300 text-stone-700 bg-white hover:bg-stone-50"
+            : "border-stone-300 text-stone-700 bg-white hover:bg-stone-50 cursor-pointer"
           }`}
       >
         <svg
@@ -47,7 +47,7 @@ export default function Pagination({
         disabled={currentPage === totalPages}
         className={`px-4 py-2 border rounded-md text-sm font-medium transition-colors flex items-center gap-1 ${currentPage === totalPages
             ? "border-stone-200 text-stone-400 cursor-not-allowed bg-stone-100"
-            : "border-stone-300 text-stone-700 bg-white hover:bg-stone-50"
+            : "border-stone-300 text-stone-700 bg-white hover:bg-stone-50 cursor-pointer"
           }`}
       >
         Next
