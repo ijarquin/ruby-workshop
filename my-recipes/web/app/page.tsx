@@ -9,6 +9,7 @@ import useWindowSize from "../hooks/useWindowSize";
 import RecipeDetailPanel from "../components/RecipeDetailsPanel";
 import Pagination from "../components/Pagination";
 import RecipeCardSkeletonLoading from "../components/RecipeCardSkeletonLoading";
+import KitchenTipsGrid from "../components/KitchenTipsGrid";
 
 export default function Home() {
   const [ingredients, setIngredients] = useState<string[]>([]);
@@ -109,7 +110,9 @@ export default function Home() {
 
         {/* Recipe Grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10">
-          {isLoading ? (
+          {ingredients.length === 0 ? (
+            <KitchenTipsGrid />
+          ) : isLoading ? (
             [...Array(9)].map((_, index) => (
               <RecipeCardSkeletonLoading key={index} />
             ))

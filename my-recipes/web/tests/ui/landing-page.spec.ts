@@ -43,6 +43,17 @@ test.describe('Footer', () => {
   });
 });
 
+test.describe('Kitchen tips (initial state)', () => {
+  test('displays 9 kitchen tip cards before any search is made', async ({ page }) => {
+    await expect(page.getByRole('heading', { level: 3 })).toHaveCount(9);
+  });
+
+  test('displays recognisable tip titles', async ({ page }) => {
+    await expect(page.getByRole('heading', { name: 'Season in Layers' })).toBeVisible();
+    await expect(page.getByRole('heading', { name: 'Mise en Place' })).toBeVisible();
+  });
+});
+
 test.describe('Recipe details panel', () => {
   test('adapts from 3-column to 1-column layout when switching to mobile', async ({ page }) => {
     await page.setViewportSize({ width: 1280, height: 800 });
