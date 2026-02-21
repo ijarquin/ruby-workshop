@@ -39,12 +39,16 @@ describe("fetchRecipes", () => {
     vi.unstubAllGlobals();
   });
 
-  it("calls the API with an empty query string when no ingredients are provided", async () => {
+  it("calls the API with only the page param when no ingredients are provided", async () => {
     mockFetch(true, mockResponse);
 
     await fetchRecipes([]);
 
-    expect(fetch).toHaveBeenCalledWith("http://localhost:3000/api/v1/recipes?");
+    const calledUrl = (fetch as ReturnType<typeof vi.fn>).mock
+      .calls[0][0] as string;
+    const params = new URL(calledUrl).searchParams;
+    expect(params.get("page")).toBe("1");
+    expect(params.getAll("ingredients[]")).toEqual([]);
   });
 
   it("calls the API with the correct query string when ingredients are provided", async () => {
@@ -56,6 +60,18 @@ describe("fetchRecipes", () => {
       .calls[0][0] as string;
     const params = new URL(calledUrl).searchParams;
     expect(params.getAll("ingredients[]")).toEqual(["Chicken", "Garlic"]);
+    expect(params.get("page")).toBe("1");
+  });
+
+  it("includes the page number in the query string", async () => {
+    mockFetch(true, mockResponse);
+
+    await fetchRecipes(["Chicken"], 3);
+
+    const calledUrl = (fetch as ReturnType<typeof vi.fn>).mock
+      .calls[0][0] as string;
+    const params = new URL(calledUrl).searchParams;
+    expect(params.get("page")).toBe("3");
   });
 
   it("trims whitespace from ingredients before building the query string", async () => {

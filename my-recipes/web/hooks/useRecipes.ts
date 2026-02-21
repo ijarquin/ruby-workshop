@@ -27,20 +27,22 @@ export interface RecipesResponse {
   total_pages: number;
 }
 
-const buildQueryString = (ingredients: string[]) => {
+const buildQueryString = (ingredients: string[], page: number) => {
   const params = new URLSearchParams();
   ingredients.forEach((ing) => {
     if (ing.trim()) {
       params.append("ingredients[]", ing.trim());
     }
   });
+  params.append("page", String(page));
   return `?${params.toString()}`;
 };
 
 export const fetchRecipes = async (
   ingredients: string[] = [],
+  page: number = 1,
 ): Promise<RecipesResponse> => {
-  const queryString = buildQueryString(ingredients);
+  const queryString = buildQueryString(ingredients, page);
   const response = await fetch(`${API_URL}/recipes${queryString}`);
 
   if (!response.ok) {
@@ -50,9 +52,9 @@ export const fetchRecipes = async (
   return response.json();
 };
 
-export const useRecipes = (ingredients: string[]) => {
+export const useRecipes = (ingredients: string[], page: number = 1) => {
   return useQuery({
-    queryKey: ["recipes", ingredients],
-    queryFn: () => fetchRecipes(ingredients),
+    queryKey: ["recipes", ingredients, page],
+    queryFn: () => fetchRecipes(ingredients, page),
   });
 };
