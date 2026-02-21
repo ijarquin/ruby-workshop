@@ -18,7 +18,7 @@ export default function RecipeDetailPanel({
     <div className="col-span-1 sm:col-span-2 lg:col-span-3 bg-stone-50 border border-amber-700 rounded-md shadow-sm p-8 mt-6 mb-10 relative animate-in fade-in zoom-in-95 duration-300">
       <button
         onClick={onClose}
-        className="absolute top-4 right-4 text-stone-400 hover:text-stone-700 focus:outline-none"
+        className="absolute top-4 right-4 text-stone-400 hover:text-stone-700 focus:outline-none cursor-pointer"
         aria-label="Close details"
       >
         <svg
