@@ -8,6 +8,7 @@ import { useRecipes } from "../hooks/useRecipes";
 import useWindowSize from "../hooks/useWindowSize";
 import RecipeDetailPanel from "../components/RecipeDetailsPanel";
 import Pagination from "../components/Pagination";
+import RecipeCardSkeletonLoading from "../components/RecipeCardSkeletonLoading";
 
 export default function Home() {
   const [ingredients, setIngredients] = useState<string[]>([]);
@@ -19,7 +20,10 @@ export default function Home() {
 
   const PAGE_SIZE = 9;
   const getTotalPages = () => Math.ceil(recipes.length / PAGE_SIZE);
-  const paginatedRecipes = recipes.slice((currentPage - 1) * PAGE_SIZE, currentPage * PAGE_SIZE);
+  const paginatedRecipes = recipes.slice(
+    (currentPage - 1) * PAGE_SIZE,
+    currentPage * PAGE_SIZE,
+  );
 
   const handleSearch = (newIngredients: string[]) => {
     setIngredients(newIngredients);
@@ -32,7 +36,9 @@ export default function Home() {
   // Calculate insertion index for the details panel
   const { width } = useWindowSize();
   const numColumns = width ? (width >= 1024 ? 3 : width >= 640 ? 2 : 1) : 3;
-  const expandedIndex = paginatedRecipes.findIndex((r) => r.id === expandedRecipeId);
+  const expandedIndex = paginatedRecipes.findIndex(
+    (r) => r.id === expandedRecipeId,
+  );
   let insertionIndex = -1;
   if (expandedIndex !== -1) {
     const rowStartIndex = Math.floor(expandedIndex / numColumns) * numColumns;
@@ -42,7 +48,9 @@ export default function Home() {
     );
   }
 
-  const expandedRecipe = paginatedRecipes.find((r) => r.id === expandedRecipeId);
+  const expandedRecipe = paginatedRecipes.find(
+    (r) => r.id === expandedRecipeId,
+  );
 
   return (
     <div className="min-h-screen bg-stone-50 flex flex-col">
@@ -102,7 +110,9 @@ export default function Home() {
         {/* Recipe Grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10">
           {isLoading ? (
-            "Loading..."
+            [...Array(9)].map((_, index) => (
+              <RecipeCardSkeletonLoading key={index} />
+            ))
           ) : isError ? (
             <div className="col-span-full text-center py-12">
               <p className="text-xl font-serif text-red-500">
