@@ -50,13 +50,32 @@ RSpec.describe "Api::V1::Recipes", type: :request do
         expect(simple_cake_json["ingredients"].first.keys).to(contain_exactly("id", "name"))
       end
 
-      it "returns and empty collecton when no mathing ingredients" do
+      it "includes pagination metadata in the response" do
+        get("/api/v1/recipes", params: { ingredients: [ "flour", "sugar" ] })
+        json = JSON.parse(response.body)
+
+        expect(json).to(have_key("current_page"))
+        expect(json).to(have_key("total_pages"))
+        expect(json["current_page"]).to(eq(1))
+        expect(json["total_pages"]).to(eq(1))
+      end
+
+      it "returns the requested page of results" do
+        get("/api/v1/recipes", params: { ingredients: [ "flour", "sugar" ], page: 1 })
+        json = JSON.parse(response.body)
+
+        expect(json["current_page"]).to(eq(1))
+      end
+
+      it "returns an empty collection when no matching ingredients" do
         get("/api/v1/recipes", params: { ingredients: [ "bread" ] })
         json = JSON.parse(response.body)
         recipes = json["recipes"]
 
         expect(response).to(have_http_status(:success))
         expect(recipes.size).to(eq(0))
+        expect(json["current_page"]).to(eq(1))
+        expect(json["total_pages"]).to(eq(0))
       end
     end
   end
