@@ -42,4 +42,13 @@ describe('RecipeCard', () => {
 
     expect(screen.getByText('Click to show recipe preparation details')).toBeInTheDocument();
   });
+
+  it('calls onClick when the card is clicked', () => {
+    const onClick = vi.fn();
+    render(<RecipeCard {...defaultProps} onClick={onClick} />);
+
+    fireEvent.click(screen.getByRole('heading', { name: 'Sugar Free Banana Bread' }));
+
+    expect(onClick).toHaveBeenCalledOnce();
+  });
 });

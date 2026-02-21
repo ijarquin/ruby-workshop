@@ -5,9 +5,12 @@ import SearchBar from "../components/SearchBar";
 import RecipeCard from "../components/RecipeCard";
 import React, { useState, useMemo } from "react";
 import { useRecipes } from "../hooks/useRecipes";
+import useWindowSize from "../hooks/useWindowSize";
+import RecipeDetailPanel from "../components/RecipeDetailsPanel";
 
 export default function Home() {
   const [ingredients, setIngredients] = useState<string[]>([]);
+  const [expandedRecipeId, setExpandedRecipeId] = useState<number | null>(null);
 
   const { data, isLoading, isError } = useRecipes(ingredients);
   const recipes = useMemo(() => data?.recipes ?? [], [data?.recipes]);
@@ -15,6 +18,25 @@ export default function Home() {
   const handleSearch = (newIngredients: string[]) => {
     setIngredients(newIngredients);
   };
+
+  const handleRecipeClick = (id: number) => {
+    setExpandedRecipeId(expandedRecipeId === id ? null : id);
+  };
+
+  // Calculate insertion index for the details panel
+  const { width } = useWindowSize();
+  const numColumns = width ? (width >= 1024 ? 3 : width >= 640 ? 2 : 1) : 3;
+  const expandedIndex = recipes.findIndex((r) => r.id === expandedRecipeId);
+  let insertionIndex = -1;
+  if (expandedIndex !== -1) {
+    const rowStartIndex = Math.floor(expandedIndex / numColumns) * numColumns;
+    insertionIndex = Math.min(
+      rowStartIndex + numColumns - 1,
+      recipes.length - 1,
+    );
+  }
+
+  const expandedRecipe = recipes.find((r) => r.id === expandedRecipeId);
 
   return (
     <div className="min-h-screen bg-stone-50 flex flex-col">
@@ -82,13 +104,23 @@ export default function Home() {
               </p>
             </div>
           ) : recipes.length > 0 ? (
-            recipes.map((recipe) => (
+            recipes.map((recipe, index) => (
               <React.Fragment key={recipe.id}>
                 <RecipeCard
                   title={recipe.title}
                   imageURL={recipe.image}
                   category={recipe.category || recipe.cuisine || "Unknown"}
+                  onClick={() => handleRecipeClick(recipe.id)}
+                  isSelected={expandedRecipeId === recipe.id}
                 />
+                {index === insertionIndex && expandedRecipe && (
+                  <div className="col-span-1 sm:col-span-2 lg:col-span-3 w-full">
+                    <RecipeDetailPanel
+                      recipe={expandedRecipe}
+                      onClose={() => setExpandedRecipeId(null)}
+                    />
+                  </div>
+                )}
               </React.Fragment>
             ))
           ) : (

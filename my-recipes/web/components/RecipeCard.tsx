@@ -4,18 +4,21 @@ interface RecipeCardProps {
   title: string;
   imageURL: string;
   category: string;
+  onClick?: () => void;
+  isSelected?: boolean;
 }
 
 export default function RecipeCard({
   title,
   imageURL,
   category,
+  onClick,
+  isSelected,
 }: RecipeCardProps) {
   return (
     <div
-      className={
-        "group overflow-hidden rounded-md shadow-sm hover:shadow-md transition-shadow duration-300 cursor-pointer border border-stone-200"
-      }
+      onClick={onClick}
+      className={`group overflow-hidden rounded-md shadow-sm hover:shadow-md transition-shadow duration-300 cursor-pointer border ${isSelected ? "border-amber-700 ring-1 ring-amber-700" : "border-stone-200"}`}
     >
       <div className="relative h-56 overflow-hidden">
         <Image
