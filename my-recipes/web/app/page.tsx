@@ -16,18 +16,13 @@ export default function Home() {
   const [expandedRecipeId, setExpandedRecipeId] = useState<number | null>(null);
   const [currentPage, setCurrentPage] = useState(1);
 
-  const { data, isLoading, isError } = useRecipes(ingredients);
+  const { data, isLoading, isError } = useRecipes(ingredients, currentPage);
   const recipes = useMemo(() => data?.recipes ?? [], [data?.recipes]);
-
-  const PAGE_SIZE = 9;
-  const getTotalPages = () => Math.ceil(recipes.length / PAGE_SIZE);
-  const paginatedRecipes = recipes.slice(
-    (currentPage - 1) * PAGE_SIZE,
-    currentPage * PAGE_SIZE,
-  );
+  const totalPages = data?.total_pages ?? 0;
 
   const handleSearch = (newIngredients: string[]) => {
     setIngredients(newIngredients);
+    setCurrentPage(1);
   };
 
   const handleRecipeClick = (id: number) => {
@@ -37,7 +32,7 @@ export default function Home() {
   // Calculate insertion index for the details panel
   const { width } = useWindowSize();
   const numColumns = width ? (width >= 1024 ? 3 : width >= 640 ? 2 : 1) : 3;
-  const expandedIndex = paginatedRecipes.findIndex(
+  const expandedIndex = recipes.findIndex(
     (r) => r.id === expandedRecipeId,
   );
   let insertionIndex = -1;
@@ -45,11 +40,11 @@ export default function Home() {
     const rowStartIndex = Math.floor(expandedIndex / numColumns) * numColumns;
     insertionIndex = Math.min(
       rowStartIndex + numColumns - 1,
-      paginatedRecipes.length - 1,
+      recipes.length - 1,
     );
   }
 
-  const expandedRecipe = paginatedRecipes.find(
+  const expandedRecipe = recipes.find(
     (r) => r.id === expandedRecipeId,
   );
 
@@ -122,8 +117,8 @@ export default function Home() {
                 Error loading recipes. Please try again later.
               </p>
             </div>
-          ) : paginatedRecipes.length > 0 ? (
-            paginatedRecipes.map((recipe, index) => (
+          ) : recipes.length > 0 ? (
+            recipes.map((recipe, index) => (
               <React.Fragment key={recipe.id}>
                 <RecipeCard
                   title={recipe.title}
@@ -155,7 +150,7 @@ export default function Home() {
         {!isLoading && !isError && recipes.length > 0 && (
           <Pagination
             currentPage={currentPage}
-            totalPages={getTotalPages()}
+            totalPages={totalPages}
             onPageChange={(page) => {
               setCurrentPage(page);
               setExpandedRecipeId(null);
