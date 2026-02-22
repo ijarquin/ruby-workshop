@@ -2,6 +2,64 @@
 
 The application has been split into two apps, a Ruby on Rails API and a Next.js frontend application (web). We have made use of docker for an easy set up, instructions on how to run the application locally can be found below in the installation and setup section.
 
+## Product
+
+It's dinner time! Create an application that helps users find the most relevant recipes that they can prepare with the ingredients that they have at home.
+
+### User stories
+
+We have created the following stories to address the statment above
+
+#### Story 1 - Select or introduce ingredients
+
+**As a** home cook,
+**I want to** enter the ingredients I currently have available at home,
+**So that** the application can find recipes I am able to prepare without needing to buy additional items.
+
+**Acceptance Criteria:**
+
+- Given I am on the main page, when I type an ingredient name into the search bar, then the ingredient is added to my list of selected ingredients.
+- Given I have added one or more ingredients, when I submit the search, then all selected ingredients are used to query for matching recipes.
+- Given I have added an ingredient by mistake, when I remove it from the selection, then it is no longer included in the search query.
+
+**Notes:**
+
+- The input must support adding multiple ingredients, not just one.
+- The ingredient input should provide a clear experience, in line with the application's mobile-first and accessibility principles.
+
+#### Story 2 - Retrieve recipes with matching ingredients
+
+**As a** home cook,
+**I want to** see a list of recipes that match the ingredients I have selected,
+**So that** I can quickly identify what I can cook with what I already have at home.
+
+**Acceptance Criteria:**
+
+- Given I have selected one or more ingredients and submitted the search, then I should see a list of recipes that include the ingredients I selected.
+- Given the search returns a large number of results, when the results are displayed, then they are paginated so the page remains performant and easy to navigate.
+- Given the results are loading, when the API request is in progress, then a skeleton loading state is shown to maintain layout stability and avoid content shift.
+- Given a recipe is displayed, when I click on a recipe card, then I can see key information such as the recipe title and list of ingredients.
+- Given the search returns no results, then a clear and user-friendly message is shown indicating that no recipes matched the selected ingredients.
+- Given I am on a mobile device, when the results are displayed, then the layout is responsive and easy to read on smaller screens.
+
+#### Story 3 - Retrieve recipes ordered by closest match
+
+**As a** home cook,
+**I want to** see the retrieved recipes ordered by how closely they match my selected ingredients,
+**So that** the recipes I can prepare with the fewest missing ingredients appear first, making it easier to decide what to cook.
+
+**Acceptance Criteria:**
+
+- Given the results are ordered by closest match, when I navigate between pages, then the ordering remains consistent across all pages.
+- Given a recipe matches all of my selected ingredients with no extra ingredients required, when the results are displayed, then that recipe is ranked at the top of the list.
+- Given I update my ingredient selection and resubmit the search, when the new results are displayed, then the ordering is recalculated based on the updated ingredient list.
+
+**Notes:**
+
+- The ordering logic must be handled server-side by the API.
+- "Closest match" is defined as the recipe with the smallest number of extra ingredients.
+- A perfect match (0 extra ingredients needed) must always be ranked above any partial match.
+
 ## 🚀 Tech Stack
 
     Backend: Ruby on Rails (API mode)
