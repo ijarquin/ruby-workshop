@@ -56,5 +56,6 @@ export const useRecipes = (ingredients: string[], page: number = 1) => {
   return useQuery({
     queryKey: ["recipes", ingredients, page],
     queryFn: () => fetchRecipes(ingredients, page),
+    enabled: ingredients.length > 0,
   });
 };

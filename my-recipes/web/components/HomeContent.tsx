@@ -4,8 +4,8 @@ import Link from "next/link";
 import { useSearchParams, useRouter } from "next/navigation";
 import SearchBar from "./SearchBar";
 import RecipeCard from "./RecipeCard";
-import React, { useState, useMemo } from "react";
-import { useRecipes } from "../hooks/useRecipes";
+import React, { useState, useMemo, useEffect, useRef } from "react";
+import { useRecipes, Recipe } from "../hooks/useRecipes";
 import useWindowSize from "../hooks/useWindowSize";
 import RecipeDetailPanel from "./RecipeDetailsPanel";
 import Pagination from "./Pagination";
@@ -21,9 +21,47 @@ export default function HomeContent() {
 
   const [expandedRecipeId, setExpandedRecipeId] = useState<number | null>(null);
 
-  const { data, isLoading, isError } = useRecipes(ingredients, currentPage);
-  const recipes = useMemo(() => data?.recipes ?? [], [data?.recipes]);
-  const totalPages = data?.total_pages ?? 0;
+  // Mobile "load more" state
+  const [mobileLoadMorePage, setMobileLoadMorePage] = useState(1);
+  const [accumulatedRecipes, setAccumulatedRecipes] = useState<Recipe[]>([]);
+  const lastKnownTotalPages = useRef(0);
+
+  const { width } = useWindowSize();
+  const isMobile = width !== undefined && width < 640;
+
+  const activePage = isMobile ? mobileLoadMorePage : currentPage;
+  const { data, isLoading, isError, isFetching } = useRecipes(ingredients, activePage);
+
+  // Keep track of total_pages across page loads so the button stays visible while fetching
+  if (data?.total_pages !== undefined) {
+    lastKnownTotalPages.current = data.total_pages;
+  }
+  const totalPages = data?.total_pages ?? lastKnownTotalPages.current;
+
+  // Reset mobile state whenever the search changes
+  const ingredientsKey = ingredients.join(",");
+  useEffect(() => {
+    setAccumulatedRecipes([]);
+    setMobileLoadMorePage(1);
+    lastKnownTotalPages.current = 0;
+  }, [ingredientsKey]);
+
+  // Accumulate recipes on mobile — only when the response belongs to the requested page
+  useEffect(() => {
+    if (isMobile && data?.recipes && data.current_page === mobileLoadMorePage) {
+      setAccumulatedRecipes((prev) => {
+        if (mobileLoadMorePage === 1) return data.recipes;
+        const existingIds = new Set(prev.map((r) => r.id));
+        return [...prev, ...data.recipes.filter((r) => !existingIds.has(r.id))];
+      });
+    }
+  }, [data, isMobile, mobileLoadMorePage]);
+
+  const displayedRecipes = isMobile
+    ? accumulatedRecipes
+    : (data?.recipes ?? []);
+
+  const hasMore = mobileLoadMorePage < totalPages;
 
   const handleSearch = (newIngredients: string[]) => {
     if (newIngredients.length === 0) {
@@ -42,14 +80,17 @@ export default function HomeContent() {
     setExpandedRecipeId(null);
   };
 
+  const handleLoadMore = () => {
+    setMobileLoadMorePage((prev) => prev + 1);
+  };
+
   const handleRecipeClick = (id: number) => {
     setExpandedRecipeId(expandedRecipeId === id ? null : id);
   };
 
   // Calculate insertion index for the details panel
-  const { width } = useWindowSize();
   const numColumns = width ? (width >= 1024 ? 3 : width >= 640 ? 2 : 1) : 3;
-  const expandedIndex = recipes.findIndex(
+  const expandedIndex = displayedRecipes.findIndex(
     (r) => r.id === expandedRecipeId,
   );
   let insertionIndex = -1;
@@ -57,13 +98,16 @@ export default function HomeContent() {
     const rowStartIndex = Math.floor(expandedIndex / numColumns) * numColumns;
     insertionIndex = Math.min(
       rowStartIndex + numColumns - 1,
-      recipes.length - 1,
+      displayedRecipes.length - 1,
     );
   }
 
-  const expandedRecipe = recipes.find(
+  const expandedRecipe = displayedRecipes.find(
     (r) => r.id === expandedRecipeId,
   );
+
+  // Show skeleton only when there are no recipes yet and we're loading
+  const showSkeleton = isLoading && displayedRecipes.length === 0;
 
   return (
     <div className="min-h-screen bg-stone-50 flex flex-col">
@@ -128,7 +172,7 @@ export default function HomeContent() {
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10">
           {ingredients.length === 0 ? (
             <KitchenTipsGrid />
-          ) : isLoading ? (
+          ) : showSkeleton ? (
             [...Array(9)].map((_, index) => (
               <RecipeCardSkeletonLoading key={index} />
             ))
@@ -138,8 +182,8 @@ export default function HomeContent() {
                 Error loading recipes. Please try again later.
               </p>
             </div>
-          ) : recipes.length > 0 ? (
-            recipes.map((recipe, index) => (
+          ) : displayedRecipes.length > 0 ? (
+            displayedRecipes.map((recipe, index) => (
               <React.Fragment key={recipe.id}>
                 <RecipeCard
                   title={recipe.title}
@@ -167,8 +211,25 @@ export default function HomeContent() {
           )}
         </div>
 
-        {/* Pagination */}
-        {!isLoading && !isError && recipes.length > 0 && (
+        {/* Mobile: Load More button */}
+        {isMobile && !isError && ingredients.length > 0 && (displayedRecipes.length > 0 || showSkeleton) && hasMore && (
+          <div className="flex justify-center mt-12">
+            <button
+              onClick={handleLoadMore}
+              disabled={isFetching}
+              className={`px-6 py-3 rounded-md text-sm font-medium tracking-wide transition-colors border ${
+                isFetching
+                  ? "border-stone-200 text-stone-400 bg-stone-100 cursor-not-allowed"
+                  : "border-amber-700 text-amber-800 bg-white hover:bg-amber-50 cursor-pointer"
+              }`}
+            >
+              {isFetching ? "Loading..." : "Load More Recipes"}
+            </button>
+          </div>
+        )}
+
+        {/* Desktop: standard paginator */}
+        {!isMobile && !isLoading && !isError && displayedRecipes.length > 0 && (
           <Pagination
             currentPage={currentPage}
             totalPages={totalPages}
