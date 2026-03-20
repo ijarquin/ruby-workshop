@@ -21,9 +21,15 @@ import { test, expect } from '@playwright/test';
 /** Perform an ingredient search and wait for results to appear. */
 async function searchForRecipes(page: import('@playwright/test').Page, ingredients: string[]) {
   const input = page.getByPlaceholder('Add an ingredient (e.g. Chicken)...');
+  // The button is the only type="submit" in the ingredient form.
+  // Its visible label is "Add" on mobile (the " Ingredient" span is display:none
+  // below sm breakpoint), so we target it by its role in the form instead.
+  const addButton = page.locator('form button[type="submit"]');
   for (const ingredient of ingredients) {
-    await input.fill(ingredient);
-    await input.press('Enter');
+    // pressSequentially types character-by-character, reliably firing onChange
+    // on all browsers including WebKit where fill() can miss React state updates.
+    await input.pressSequentially(ingredient);
+    await addButton.click();
   }
   await page.getByRole('button', { name: /find recipes/i }).click();
 }
@@ -64,12 +70,18 @@ test.describe('Scenario 2: Tapping Load More appends the next page of recipes', 
     await page.goto('/');
     await searchForRecipes(page, ['egg']);
 
+    // Wait for Load More to confirm first page is fully loaded
+    await expect(page.getByRole('button', { name: /load more/i })).toBeVisible();
+
     // Count cards on the first page
     const cards = page.getByRole('heading', { level: 3 });
     const countBefore = await cards.count();
     expect(countBefore).toBeGreaterThan(0);
 
     await page.getByRole('button', { name: /load more/i }).click();
+
+    // Wait for new cards to appear before asserting
+    await expect(cards).not.toHaveCount(countBefore);
 
     // After tapping, total card count must be strictly greater (new cards appended)
     const countAfter = await cards.count();
@@ -79,6 +91,9 @@ test.describe('Scenario 2: Tapping Load More appends the next page of recipes', 
   test('previously visible recipe cards remain on screen after Load More is tapped', async ({ page }) => {
     await page.goto('/');
     await searchForRecipes(page, ['egg']);
+
+    // Wait for Load More to confirm recipe results are fully loaded
+    await expect(page.getByRole('button', { name: /load more/i })).toBeVisible();
 
     // Capture the title of the very first recipe card rendered
     const firstCard = page.getByRole('heading', { level: 3 }).first();

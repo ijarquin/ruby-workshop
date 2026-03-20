@@ -6,12 +6,17 @@
  * manually with Object.defineProperty to override window dimensions.
  */
 
-import { describe, it, expect, afterEach, vi } from 'vitest';
+import { describe, it, expect, afterEach, beforeEach, vi } from 'vitest';
 import { renderHook, act, cleanup } from '@testing-library/react';
 import useWindowSize from '@/hooks/useWindowSize';
 
+beforeEach(() => {
+  vi.useFakeTimers();
+});
+
 afterEach(() => {
   cleanup();
+  vi.useRealTimers();
   vi.restoreAllMocks();
 });
 
@@ -46,6 +51,7 @@ describe('useWindowSize resize tracking', () => {
       Object.defineProperty(window, 'innerWidth', { writable: true, configurable: true, value: 375 });
       Object.defineProperty(window, 'innerHeight', { writable: true, configurable: true, value: 667 });
       window.dispatchEvent(new Event('resize'));
+      vi.advanceTimersByTime(150);
     });
 
     expect(result.current.width).toBe(375);
@@ -59,6 +65,7 @@ describe('useWindowSize resize tracking', () => {
       Object.defineProperty(window, 'innerWidth', { writable: true, configurable: true, value: 1440 });
       Object.defineProperty(window, 'innerHeight', { writable: true, configurable: true, value: 900 });
       window.dispatchEvent(new Event('resize'));
+      vi.advanceTimersByTime(150);
     });
 
     expect(result.current.width).toBe(1440);
@@ -72,6 +79,7 @@ describe('useWindowSize resize tracking', () => {
       Object.defineProperty(window, 'innerWidth', { writable: true, configurable: true, value: 768 });
       Object.defineProperty(window, 'innerHeight', { writable: true, configurable: true, value: 1024 });
       window.dispatchEvent(new Event('resize'));
+      vi.advanceTimersByTime(150);
     });
 
     expect(result.current.width).toBe(768);
@@ -80,6 +88,7 @@ describe('useWindowSize resize tracking', () => {
       Object.defineProperty(window, 'innerWidth', { writable: true, configurable: true, value: 390 });
       Object.defineProperty(window, 'innerHeight', { writable: true, configurable: true, value: 844 });
       window.dispatchEvent(new Event('resize'));
+      vi.advanceTimersByTime(150);
     });
 
     expect(result.current.width).toBe(390);
@@ -135,6 +144,7 @@ describe('useWindowSize mobile boundary', () => {
     act(() => {
       Object.defineProperty(window, 'innerWidth', { writable: true, configurable: true, value: 639 });
       window.dispatchEvent(new Event('resize'));
+      vi.advanceTimersByTime(150);
     });
 
     expect(result.current.width).toBe(639);
@@ -147,6 +157,7 @@ describe('useWindowSize mobile boundary', () => {
     act(() => {
       Object.defineProperty(window, 'innerWidth', { writable: true, configurable: true, value: 640 });
       window.dispatchEvent(new Event('resize'));
+      vi.advanceTimersByTime(150);
     });
 
     expect(result.current.width).toBe(640);
