@@ -22,7 +22,15 @@ function NoImagePlaceholder() {
         {/* Flash dot */}
         <circle cx="90" cy="38" r="5" fill="#a8a29e" />
         {/* Diagonal slash */}
-        <line x1="18" y1="18" x2="102" y2="92" stroke="#ef4444" strokeWidth="6" strokeLinecap="round" />
+        <line
+          x1="18"
+          y1="18"
+          x2="102"
+          y2="92"
+          stroke="#ef4444"
+          strokeWidth="6"
+          strokeLinecap="round"
+        />
       </svg>
       <span className="text-xs font-medium text-stone-400 tracking-wide uppercase">
         No image available

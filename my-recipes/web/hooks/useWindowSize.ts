@@ -10,17 +10,29 @@ export default function useWindowSize() {
   });
 
   useEffect(() => {
+    let timeoutId: ReturnType<typeof setTimeout>;
+
     function handleResize() {
-      setWindowSize({
-        width: window.innerWidth,
-        height: window.innerHeight,
-      });
+      clearTimeout(timeoutId);
+      timeoutId = setTimeout(() => {
+        setWindowSize({
+          width: window.innerWidth,
+          height: window.innerHeight,
+        });
+      }, 150);
     }
 
     window.addEventListener("resize", handleResize);
-    handleResize(); // Call right away so state gets updated with initial window size
+    // Call right away (without debounce) so state gets updated with initial window size
+    setWindowSize({
+      width: window.innerWidth,
+      height: window.innerHeight,
+    });
 
-    return () => window.removeEventListener("resize", handleResize);
+    return () => {
+      clearTimeout(timeoutId);
+      window.removeEventListener("resize", handleResize);
+    };
   }, []);
 
   return windowSize;
