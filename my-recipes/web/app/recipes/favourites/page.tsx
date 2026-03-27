@@ -1,3 +1,8 @@
+import Recipe from "../../../components/Recipe";
+import type { Recipe as RecipeType } from "../../../hooks/useRecipes";
+
+const favouriteRecipes: RecipeType[] = [];
+
 export default function Favourites() {
   return (
     <div className="min-h-screen bg-stone-50 flex flex-col">
@@ -16,6 +21,20 @@ export default function Favourites() {
           >
             Save as many recipes as you like so you can quickly find them
           </p>
+        </div>
+
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10 grid-flow-row-dense">
+          {favouriteRecipes.length > 0 ? (
+            favouriteRecipes.map((recipe) => (
+              <Recipe key={recipe.id} recipe={recipe} />
+            ))
+          ) : (
+            <div className="col-span-full text-center py-12">
+              <p className="text-xl font-serif text-stone-500">
+                No saved recipes yet.
+              </p>
+            </div>
+          )}
         </div>
       </main>
     </div>
