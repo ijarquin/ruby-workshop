@@ -22,6 +22,8 @@ export default function HomeContent() {
   const { width } = useWindowSize();
   const isMobile = width !== undefined && width < 640;
 
+  const [selectedRecipeId, setSelectedRecipeId] = useState<number | null>(null);
+
   // -------------------------------------------------------------------------
   // Mobile-only: accumulated recipe list and page cursor
   // -------------------------------------------------------------------------
@@ -30,7 +32,9 @@ export default function HomeContent() {
   const [mobilePage, setMobilePage] = useState(1);
 
   // The flat list of recipes accumulated across all "Load More" taps.
-  const [accumulatedRecipes, setAccumulatedRecipes] = useState<RecipeType[]>([]);
+  const [accumulatedRecipes, setAccumulatedRecipes] = useState<RecipeType[]>(
+    [],
+  );
 
   // True only while a Load More tap is in flight (not the initial page load).
   const [isLoadingMore, setIsLoadingMore] = useState(false);
@@ -103,12 +107,12 @@ export default function HomeContent() {
 
   const handleSearch = (newIngredients: string[]) => {
     if (newIngredients.length === 0) {
-      router.push("/");
+      router.push("/recipes");
       return;
     }
     const params = new URLSearchParams();
     newIngredients.forEach((ing) => params.append("ingredients", ing));
-    router.push(`/?${params.toString()}`);
+    router.push(`/recipes?${params.toString()}`);
   };
 
   const handlePageChange = (page: number) => {
@@ -171,7 +175,16 @@ export default function HomeContent() {
             </div>
           ) : recipes.length > 0 ? (
             recipes.map((recipe) => (
-              <Recipe key={recipe.id} recipe={recipe} />
+              <Recipe
+                key={recipe.id}
+                recipe={recipe}
+                isExpanded={selectedRecipeId === recipe.id}
+                onToggle={() =>
+                  setSelectedRecipeId((prev) =>
+                    prev === recipe.id ? null : recipe.id,
+                  )
+                }
+              />
             ))
           ) : (
             <div className="col-span-full text-center py-12">

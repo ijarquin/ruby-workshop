@@ -17,7 +17,7 @@ const geistMono = Geist_Mono({
 });
 
 const navLinks = [
-  { href: "/", label: "Home" },
+  { href: "/recipes", label: "Home" },
   { href: "/recipes/favourites", label: "Saved Recipes" },
   { href: "#", label: "About" },
 ];
@@ -41,7 +41,7 @@ export default function RootLayout({
                 <div className="flex justify-between h-20">
                   <div className="shrink-0 flex items-center">
                     <Link
-                      href="/"
+                      href="/recipes"
                       className="text-2xl font-serif font-bold text-amber-800 tracking-wide italic"
                     >
                       MyRecipes
@@ -49,16 +49,18 @@ export default function RootLayout({
                   </div>
                   <div className="hidden sm:ml-6 sm:flex sm:space-x-8">
                     {navLinks.map(({ href, label }) => {
-                      const isActive = href === "/" ? pathname === "/" : pathname.startsWith(href);
+                      const isActive =
+                        href === "/recipes"
+                          ? pathname === "/recipes"
+                          : pathname.startsWith(href);
                       return (
                         <Link
                           key={href}
                           href={href}
-                          className={`tracking-wide uppercase inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium ${
-                            isActive
+                          className={`tracking-wide uppercase inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium ${isActive
                               ? "border-amber-700 text-stone-900"
                               : "border-transparent text-stone-500 hover:border-amber-300 hover:text-stone-800"
-                          }`}
+                            }`}
                         >
                           {label}
                         </Link>
