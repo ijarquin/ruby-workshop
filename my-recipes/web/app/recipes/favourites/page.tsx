@@ -1,5 +1,23 @@
 export default function Favourites() {
   return (
-    <div>hola que tal</div>
+    <div className="min-h-screen bg-stone-50 flex flex-col">
+      <main className="grow max-w-6xl mx-auto px-6 sm:px-8 lg:px-12 py-12 w-full">
+        {/* Hero / Header Section */}
+        <div className="text-center mb-16">
+          <h1
+            tabIndex={0}
+            className="text-4xl sm:text-5xl font-serif font-bold text-stone-900 mb-4 tracking-tight focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-700 focus-visible:rounded-sm"
+          >
+            Your Favourites <span className="text-amber-700">Recipes</span>
+          </h1>
+          <p
+            tabIndex={0}
+            className="text-lg text-stone-500 leading-relaxed mb-10 max-w-2xl mx-auto focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-700 focus-visible:rounded-sm"
+          >
+            Save as many recipes as you like so you can quickly find them
+          </p>
+        </div>
+      </main>
+    </div>
   );
 }
