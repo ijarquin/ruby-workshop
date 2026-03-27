@@ -2,16 +2,15 @@
 
 import { useSearchParams, useRouter } from "next/navigation";
 import SearchBar from "./SearchBar";
-import RecipeCard from "./RecipeCard";
 import React, { useState, useMemo, useEffect, useRef } from "react";
 import { useRecipes } from "../hooks/useRecipes";
 import useWindowSize from "../hooks/useWindowSize";
-import RecipeDetailPanel from "./RecipeDetailsPanel";
+import Recipe from "./Recipe";
 import Pagination from "./Pagination";
 import LoadMoreButton from "./LoadMoreButton";
 import RecipeCardSkeletonLoading from "./RecipeCardSkeletonLoading";
 import KitchenTipsGrid from "./KitchenTipsGrid";
-import type { Recipe } from "../hooks/useRecipes";
+import type { Recipe as RecipeType } from "../hooks/useRecipes";
 
 export default function HomeContent() {
   const searchParams = useSearchParams();
@@ -31,7 +30,7 @@ export default function HomeContent() {
   const [mobilePage, setMobilePage] = useState(1);
 
   // The flat list of recipes accumulated across all "Load More" taps.
-  const [accumulatedRecipes, setAccumulatedRecipes] = useState<Recipe[]>([]);
+  const [accumulatedRecipes, setAccumulatedRecipes] = useState<RecipeType[]>([]);
 
   // True only while a Load More tap is in flight (not the initial page load).
   const [isLoadingMore, setIsLoadingMore] = useState(false);
@@ -93,7 +92,7 @@ export default function HomeContent() {
 
   // The recipe list shown in the grid.
   // On mobile: use the accumulated list. On desktop: use the current page directly.
-  const recipes = useMemo(() => {
+  const recipes = useMemo<RecipeType[]>(() => {
     if (isMobile) return accumulatedRecipes;
     return data?.recipes ?? [];
   }, [isMobile, accumulatedRecipes, data?.recipes]);
@@ -116,36 +115,12 @@ export default function HomeContent() {
     const params = new URLSearchParams(searchParams.toString());
     params.set("page", String(page));
     router.replace(`/?${params.toString()}`);
-    setExpandedRecipeId(null);
   };
 
   const handleLoadMore = () => {
     setIsLoadingMore(true);
     setMobilePage((prev) => prev + 1);
   };
-
-  const [expandedRecipeId, setExpandedRecipeId] = useState<number | null>(null);
-
-  const handleRecipeClick = (id: number) => {
-    setExpandedRecipeId(expandedRecipeId === id ? null : id);
-  };
-
-  // -------------------------------------------------------------------------
-  // Detail panel insertion logic
-  // -------------------------------------------------------------------------
-
-  const numColumns = width ? (width >= 1024 ? 3 : width >= 640 ? 2 : 1) : 3;
-  const expandedIndex = recipes.findIndex((r) => r.id === expandedRecipeId);
-  let insertionIndex = -1;
-  if (expandedIndex !== -1) {
-    const rowStartIndex = Math.floor(expandedIndex / numColumns) * numColumns;
-    insertionIndex = Math.min(
-      rowStartIndex + numColumns - 1,
-      recipes.length - 1,
-    );
-  }
-
-  const expandedRecipe = recipes.find((r) => r.id === expandedRecipeId);
 
   // -------------------------------------------------------------------------
   // Loading skeleton: show only on initial page load, not on Load More taps.
@@ -181,7 +156,7 @@ export default function HomeContent() {
         </div>
 
         {/* Recipe Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10 grid-flow-row-dense">
           {ingredients.length === 0 ? (
             <KitchenTipsGrid />
           ) : showSkeleton ? (
@@ -195,24 +170,8 @@ export default function HomeContent() {
               </p>
             </div>
           ) : recipes.length > 0 ? (
-            recipes.map((recipe, index) => (
-              <React.Fragment key={recipe.id}>
-                <RecipeCard
-                  title={recipe.title}
-                  imageURL={recipe.image}
-                  category={recipe.category || recipe.cuisine || "Unknown"}
-                  onClick={() => handleRecipeClick(recipe.id)}
-                  isSelected={expandedRecipeId === recipe.id}
-                />
-                {index === insertionIndex && expandedRecipe && (
-                  <div className="col-span-1 sm:col-span-2 lg:col-span-3 w-full">
-                    <RecipeDetailPanel
-                      recipe={expandedRecipe}
-                      onClose={() => setExpandedRecipeId(null)}
-                    />
-                  </div>
-                )}
-              </React.Fragment>
+            recipes.map((recipe) => (
+              <Recipe key={recipe.id} recipe={recipe} />
             ))
           ) : (
             <div className="col-span-full text-center py-12">
