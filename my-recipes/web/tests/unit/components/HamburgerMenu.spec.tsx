@@ -19,7 +19,14 @@ vi.mock("next/link", () => ({
     onClick?: () => void;
     className?: string;
   }) => (
-    <a href={href} onClick={onClick} className={className}>
+    <a
+      href={href}
+      onClick={(e) => {
+        e.preventDefault();
+        onClick?.();
+      }}
+      className={className}
+    >
       {children}
     </a>
   ),
