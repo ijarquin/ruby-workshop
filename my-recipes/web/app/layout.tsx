@@ -68,7 +68,7 @@ export default function RootLayout({
                       );
                     })}
                   </div>
-                  <div className="flex items-center">
+                  <div className="flex items-center sm:hidden">
                     <HamburgerMenu />
                   </div>
                 </div>
