@@ -1,9 +1,11 @@
-import Recipe from "../../../components/Recipe";
-import type { Recipe as RecipeType } from "../../../hooks/useRecipes";
+"use client";
 
-const favouriteRecipes: RecipeType[] = [];
+import { useState } from "react";
+import Recipe from "../../../components/Recipe";
+import mockFavouriteRecipes from "./mockRecipes";
 
 export default function Favourites() {
+  const [selectedRecipeId, setSelectedRecipeId] = useState<number | null>(null);
   return (
     <div className="min-h-screen bg-stone-50 flex flex-col">
       <main className="grow max-w-6xl mx-auto px-6 sm:px-8 lg:px-12 py-12 w-full">
@@ -24,9 +26,18 @@ export default function Favourites() {
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10 grid-flow-row-dense">
-          {favouriteRecipes.length > 0 ? (
-            favouriteRecipes.map((recipe) => (
-              <Recipe key={recipe.id} recipe={recipe} />
+          {mockFavouriteRecipes.length > 0 ? (
+            mockFavouriteRecipes.map((recipe) => (
+              <Recipe
+                key={recipe.id}
+                recipe={recipe}
+                isExpanded={selectedRecipeId === recipe.id}
+                onToggle={() =>
+                  setSelectedRecipeId((prev) =>
+                    prev === recipe.id ? null : recipe.id
+                  )
+                }
+              />
             ))
           ) : (
             <div className="col-span-full text-center py-12">

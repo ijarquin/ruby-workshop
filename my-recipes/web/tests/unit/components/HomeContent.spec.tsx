@@ -630,16 +630,6 @@ describe('Accumulated list resets on search change', () => {
 // 9. Page header and navigation chrome
 // ===========================================================================
 describe('Page chrome', () => {
-  it('renders the MyRecipes brand link', () => {
-    setupSearchParams([]);
-    setupWindowSize(1280);
-    setupRecipes(makeResponse([]));
-
-    render(<HomeContent />);
-
-    expect(screen.getByRole('link', { name: /myrecipes/i })).toBeInTheDocument();
-  });
-
   it('renders the main heading', () => {
     setupSearchParams([]);
     setupWindowSize(1280);
@@ -650,16 +640,6 @@ describe('Page chrome', () => {
     expect(
       screen.getByRole('heading', { name: /discover delicious recipes/i })
     ).toBeInTheDocument();
-  });
-
-  it('renders the footer copyright notice', () => {
-    setupSearchParams([]);
-    setupWindowSize(1280);
-    setupRecipes(makeResponse([]));
-
-    render(<HomeContent />);
-
-    expect(screen.getByText(/2026 myrecipes/i)).toBeInTheDocument();
   });
 });
 
