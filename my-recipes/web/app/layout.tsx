@@ -1,3 +1,4 @@
+import Link from "next/link";
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
@@ -28,7 +29,50 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <Providers>{children}</Providers>
+        <div className="min-h-screen bg-stone-50 flex flex-col">
+          <header>
+            <nav className="bg-white border-b border-stone-200">
+              <div className="max-w-6xl mx-auto px-6 sm:px-8 lg:px-12">
+                <div className="flex justify-between h-20">
+                  <div className="shrink-0 flex items-center">
+                    <Link
+                      href="/"
+                      className="text-2xl font-serif font-bold text-amber-800 tracking-wide italic"
+                    >
+                      MyRecipes
+                    </Link>
+                  </div>
+                  <div className="hidden sm:ml-6 sm:flex sm:space-x-8">
+                    <Link
+                      href="/"
+                      className="border-amber-700 text-stone-900 tracking-wide uppercase inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium"
+                    >
+                      Home
+                    </Link>
+                    <Link
+                      href="#"
+                      className="border-transparent text-stone-500 hover:border-amber-300 hover:text-stone-800 tracking-wide uppercase inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium"
+                    >
+                      Saved Recipes
+                    </Link>
+                    <Link
+                      href="#"
+                      className="border-transparent text-stone-500 hover:border-amber-300 hover:text-stone-800 tracking-wide uppercase inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium"
+                    >
+                      About
+                    </Link>
+                  </div>
+                </div>
+              </div>
+            </nav>
+          </header>
+          <Providers>{children}</Providers>
+          <footer className="bg-stone-100 border-t border-stone-200 py-10 mt-auto">
+            <div className="max-w-6xl mx-auto px-6 sm:px-8 lg:px-12 text-center text-stone-500">
+              <p>&copy; 2026 MyRecipes. All rights reserved.</p>
+            </div>
+          </footer>
+        </div>
       </body>
     </html>
   );
