@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Recipe } from "../hooks/useRecipes";
 
 interface RecipeDetailPanelProps {
@@ -11,6 +11,8 @@ export default function RecipeDetailPanel({
   onClose,
 }: RecipeDetailPanelProps) {
   const titleRef = useRef<HTMLHeadingElement>(null);
+  const [isFavourited, setIsFavourited] = useState(false);
+  const [notification, setNotification] = useState<string | null>(null);
 
   useEffect(() => {
     const trigger = document.activeElement as HTMLElement | null;
@@ -20,6 +22,16 @@ export default function RecipeDetailPanel({
     };
   }, []);
 
+  const handleFavourite = () => {
+    const next = !isFavourited;
+    setIsFavourited(next);
+    setNotification(
+      next
+        ? "Your recipe has been saved to your favourites."
+        : "This recipe has been removed from your list of favourites."
+    );
+  };
+
   // Split ingredients into two columns approximately
   const half = Math.ceil(recipe.ingredients.length / 2);
   const firstColIngredients = recipe.ingredients.slice(0, half);
@@ -27,6 +39,30 @@ export default function RecipeDetailPanel({
 
   return (
     <div className="col-span-1 sm:col-span-2 lg:col-span-3 bg-stone-50 border border-amber-700 rounded-md shadow-sm p-8 mt-6 mb-10 relative animate-in fade-in zoom-in-95 duration-300">
+      {notification && (
+        <div
+          role="status"
+          className="mb-6 px-4 py-2 bg-amber-50 border border-amber-300 rounded text-amber-800 text-sm flex items-center justify-between"
+        >
+          <span>{notification}</span>
+          <button
+            onClick={() => setNotification(null)}
+            className="ml-4 text-amber-600 hover:text-amber-900 focus:outline-none cursor-pointer flex-shrink-0"
+            aria-label="Close notification"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              className="h-4 w-4"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+            </svg>
+          </button>
+        </div>
+      )}
+
       <button
         onClick={onClose}
         className="absolute top-4 right-4 text-stone-400 hover:text-stone-700 focus:outline-none cursor-pointer"
@@ -140,6 +176,23 @@ export default function RecipeDetailPanel({
           </div>
         </div>
       </div>
+
+      <button
+        onClick={handleFavourite}
+        className="absolute bottom-4 right-4 w-10 h-10 flex items-center justify-center rounded-lg border border-stone-300 bg-white hover:border-amber-600 focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-700 cursor-pointer transition-colors"
+        aria-label={isFavourited ? "Remove from favourites" : "Save to favourites"}
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          className={`h-5 w-5 transition-colors ${isFavourited ? "fill-red-500 stroke-red-500" : "fill-none stroke-stone-400"}`}
+          viewBox="0 0 24 24"
+          strokeWidth={2}
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        >
+          <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
+        </svg>
+      </button>
     </div>
   );
 }

@@ -76,4 +76,40 @@ describe('RecipeDetailPanel', () => {
 
     expect(onClose).toHaveBeenCalledOnce();
   });
+
+  it('shows the save to favourites button', () => {
+    render(<RecipeDetailPanel recipe={mockRecipe} onClose={vi.fn()} />);
+
+    expect(screen.getByRole('button', { name: 'Save to favourites' })).toBeInTheDocument();
+  });
+
+  it('shows a saved notification when the favourites button is clicked', () => {
+    render(<RecipeDetailPanel recipe={mockRecipe} onClose={vi.fn()} />);
+
+    expect(screen.queryByRole('status')).not.toBeInTheDocument();
+
+    fireEvent.click(screen.getByRole('button', { name: 'Save to favourites' }));
+
+    expect(screen.getByRole('status')).toHaveTextContent('Your recipe has been saved to your favourites.');
+  });
+
+  it('shows a removed notification when the favourites button is clicked again', () => {
+    render(<RecipeDetailPanel recipe={mockRecipe} onClose={vi.fn()} />);
+
+    fireEvent.click(screen.getByRole('button', { name: 'Save to favourites' }));
+    fireEvent.click(screen.getByRole('button', { name: 'Remove from favourites' }));
+
+    expect(screen.getByRole('status')).toHaveTextContent('This recipe has been removed from your list of favourites.');
+  });
+
+  it('dismisses the notification when the close notification button is clicked', () => {
+    render(<RecipeDetailPanel recipe={mockRecipe} onClose={vi.fn()} />);
+
+    fireEvent.click(screen.getByRole('button', { name: 'Save to favourites' }));
+    expect(screen.getByRole('status')).toBeInTheDocument();
+
+    fireEvent.click(screen.getByRole('button', { name: 'Close notification' }));
+
+    expect(screen.queryByRole('status')).not.toBeInTheDocument();
+  });
 });
