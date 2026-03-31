@@ -42,9 +42,9 @@ export default function RecipeDetailPanel({
       {notification && (
         <div
           role="status"
-          className="mb-6 px-4 py-2 bg-amber-50 border border-amber-300 rounded text-amber-800 text-sm flex items-center justify-between"
+          className="-mx-8 -mt-8 mb-3 px-4 py-[13px] bg-amber-50 border-b border-amber-300 rounded-t-md text-amber-800 text-sm flex items-center justify-between"
         >
-          <span>{notification}</span>
+          <span className="flex-1 text-center">{notification}</span>
           <button
             onClick={() => setNotification(null)}
             className="ml-4 text-amber-600 hover:text-amber-900 focus:outline-none cursor-pointer flex-shrink-0"
@@ -65,7 +65,7 @@ export default function RecipeDetailPanel({
 
       <button
         onClick={onClose}
-        className="absolute top-4 right-4 text-stone-400 hover:text-stone-700 focus:outline-none cursor-pointer"
+        className={`absolute top-4 right-4 text-stone-400 hover:text-stone-700 focus:outline-none cursor-pointer ${notification ? "invisible" : ""}`}
         aria-label="Close details"
       >
         <svg
