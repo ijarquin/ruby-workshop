@@ -13,6 +13,7 @@ export default function RecipeDetailPanel({
   const titleRef = useRef<HTMLHeadingElement>(null);
   const [isFavourited, setIsFavourited] = useState(false);
   const [notification, setNotification] = useState<string | null>(null);
+  const [notificationFading, setNotificationFading] = useState(false);
 
   useEffect(() => {
     const trigger = document.activeElement as HTMLElement | null;
@@ -25,11 +26,14 @@ export default function RecipeDetailPanel({
   const handleFavourite = () => {
     const next = !isFavourited;
     setIsFavourited(next);
+    setNotificationFading(false);
     setNotification(
       next
         ? "Your recipe has been saved to your favourites."
         : "This recipe has been removed from your list of favourites."
     );
+    setTimeout(() => setNotificationFading(true), 5000);
+    setTimeout(() => { setNotification(null); setNotificationFading(false); }, 5500);
   };
 
   // Split ingredients into two columns approximately
@@ -42,24 +46,9 @@ export default function RecipeDetailPanel({
       {notification && (
         <div
           role="status"
-          className="-mx-8 -mt-8 mb-3 px-4 py-[13px] bg-amber-50 border-b border-amber-300 rounded-t-md text-amber-800 text-sm flex items-center justify-between"
+          className={`-mx-8 -mt-8 mb-3 px-4 py-[13px] bg-amber-700 rounded-t-md text-white text-sm flex items-center transition-opacity duration-500 ${notificationFading ? "opacity-0" : "opacity-100"}`}
         >
           <span className="flex-1 text-center">{notification}</span>
-          <button
-            onClick={() => setNotification(null)}
-            className="ml-4 text-amber-600 hover:text-amber-900 focus:outline-none cursor-pointer flex-shrink-0"
-            aria-label="Close notification"
-          >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              className="h-4 w-4"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-            </svg>
-          </button>
         </div>
       )}
 
