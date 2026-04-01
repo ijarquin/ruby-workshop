@@ -30,10 +30,13 @@ export default function RecipeDetailPanel({
     setNotification(
       next
         ? "Your recipe has been saved to your favourites."
-        : "This recipe has been removed from your list of favourites."
+        : "This recipe has been removed from your list of favourites.",
     );
     setTimeout(() => setNotificationFading(true), 5000);
-    setTimeout(() => { setNotification(null); setNotificationFading(false); }, 5500);
+    setTimeout(() => {
+      setNotification(null);
+      setNotificationFading(false);
+    }, 5500);
   };
 
   // Split ingredients into two columns approximately
@@ -46,7 +49,7 @@ export default function RecipeDetailPanel({
       {notification && (
         <div
           role="status"
-          className={`-mx-8 -mt-8 mb-3 px-4 py-[13px] bg-amber-700 rounded-t-md text-white text-sm flex items-center transition-opacity duration-500 ${notificationFading ? "opacity-0" : "opacity-100"}`}
+          className={`absolute top-0 left-0 right-0 px-4 py-5 bg-amber-700 rounded-t-md text-white text-base flex items-center transition-opacity duration-500 ${notificationFading ? "opacity-0" : "opacity-100"}`}
         >
           <span className="flex-1 text-center">{notification}</span>
         </div>
@@ -91,7 +94,10 @@ export default function RecipeDetailPanel({
             )}
           </div>
 
-          <div tabIndex={0} className="space-y-2 text-sm text-stone-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-700 focus-visible:rounded-sm">
+          <div
+            tabIndex={0}
+            className="space-y-2 text-sm text-stone-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-700 focus-visible:rounded-sm"
+          >
             <div className="flex justify-between border-b border-stone-200 pb-2">
               <span className="font-semibold">Category:</span>
               <span>{recipe.category || recipe.cuisine || "N/A"}</span>
@@ -127,7 +133,10 @@ export default function RecipeDetailPanel({
         </div>
 
         {/* Column 2 & 3: Ingredients */}
-        <div tabIndex={0} className="md:col-span-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-700 focus-visible:rounded-sm">
+        <div
+          tabIndex={0}
+          className="md:col-span-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-700 focus-visible:rounded-sm"
+        >
           <h4 className="text-lg font-serif font-bold text-stone-900 mb-4 border-b border-stone-200 pb-2">
             Ingredients
           </h4>
@@ -169,7 +178,9 @@ export default function RecipeDetailPanel({
       <button
         onClick={handleFavourite}
         className="absolute bottom-4 right-4 w-10 h-10 flex items-center justify-center rounded-lg border border-stone-300 bg-white hover:border-amber-600 focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-700 cursor-pointer transition-colors"
-        aria-label={isFavourited ? "Remove from favourites" : "Save to favourites"}
+        aria-label={
+          isFavourited ? "Remove from favourites" : "Save to favourites"
+        }
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"
