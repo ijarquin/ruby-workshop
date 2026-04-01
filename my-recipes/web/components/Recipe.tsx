@@ -8,9 +8,11 @@ interface RecipeProps {
   recipe: RecipeType;
   isExpanded: boolean;
   onToggle: () => void;
+  isFavourited: boolean;
+  onFavouriteToggle: () => void;
 }
 
-export default function Recipe({ recipe, isExpanded, onToggle }: RecipeProps) {
+export default function Recipe({ recipe, isExpanded, onToggle, isFavourited, onFavouriteToggle }: RecipeProps) {
   return (
     <>
       <RecipeCard
@@ -25,6 +27,8 @@ export default function Recipe({ recipe, isExpanded, onToggle }: RecipeProps) {
           <RecipeDetailPanel
             recipe={recipe}
             onClose={onToggle}
+            isFavourited={isFavourited}
+            onFavouriteToggle={onFavouriteToggle}
           />
         </div>
       )}

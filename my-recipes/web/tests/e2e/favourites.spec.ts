@@ -1,9 +1,31 @@
 import { test, expect } from "@playwright/test";
 
+const MOCK_FAVOURITES = [
+  {
+    id: 1,
+    title: "Spaghetti Carbonara",
+    image: "",
+    category: "Pasta",
+    cook_time: 20,
+    prep_time: 10,
+    ratings: 4.8,
+    author: "Chef Mario",
+    ingredients: [
+      { id: 1, name: "spaghetti" },
+      { id: 2, name: "eggs" },
+      { id: 3, name: "pancetta" },
+    ],
+  },
+];
+
 test.describe("Favourites page", () => {
   test("navigates to /recipes/favourites when clicking the Saved Recipes header link", async ({
     page,
   }) => {
+    await page.route("**/api/v1/users/*/favourites", (route) =>
+      route.fulfill({ json: { recipes: [] } }),
+    );
+
     await page.goto("/recipes");
 
     await page.getByRole("link", { name: "Saved Recipes" }).click();
@@ -12,6 +34,10 @@ test.describe("Favourites page", () => {
   });
 
   test("renders the page title on the favourites page", async ({ page }) => {
+    await page.route("**/api/v1/users/*/favourites", (route) =>
+      route.fulfill({ json: { recipes: [] } }),
+    );
+
     await page.goto("/recipes/favourites");
 
     await expect(
@@ -22,6 +48,10 @@ test.describe("Favourites page", () => {
   test("highlights the Saved Recipes nav link as active on the favourites page", async ({
     page,
   }) => {
+    await page.route("**/api/v1/users/*/favourites", (route) =>
+      route.fulfill({ json: { recipes: [] } }),
+    );
+
     await page.goto("/recipes/favourites");
 
     const savedRecipesLink = page.getByRole("link", { name: "Saved Recipes" });
@@ -32,6 +62,10 @@ test.describe("Favourites page", () => {
   test("opens the recipe details panel when clicking a recipe card", async ({
     page,
   }) => {
+    await page.route("**/api/v1/users/*/favourites", (route) =>
+      route.fulfill({ json: { recipes: MOCK_FAVOURITES } }),
+    );
+
     await page.goto("/recipes/favourites");
 
     await page

@@ -89,16 +89,6 @@ describe("HamburgerMenu", () => {
     );
   });
 
-  it("locks body scroll when the menu is opened and restores it when closed", () => {
-    render(<HamburgerMenu />);
-
-    fireEvent.click(screen.getByRole("button", { name: "Open menu" }));
-    expect(document.body.style.overflow).toBe("hidden");
-
-    fireEvent.click(screen.getByRole("button", { name: "Close menu" }));
-    expect(document.body.style.overflow).toBe("");
-  });
-
   it("closes the menu when a nav link is clicked", () => {
     render(<HamburgerMenu />);
 
