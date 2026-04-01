@@ -32,11 +32,11 @@ export default function RecipeDetailPanel({
         ? "Your recipe has been saved to your favourites."
         : "This recipe has been removed from your list of favourites.",
     );
-    setTimeout(() => setNotificationFading(true), 5000);
+    setTimeout(() => setNotificationFading(true), 3000);
     setTimeout(() => {
       setNotification(null);
       setNotificationFading(false);
-    }, 5500);
+    }, 3500);
   };
 
   // Split ingredients into two columns approximately
