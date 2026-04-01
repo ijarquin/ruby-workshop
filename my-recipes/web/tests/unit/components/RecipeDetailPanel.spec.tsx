@@ -22,21 +22,31 @@ const mockRecipe: Recipe = {
   ],
 };
 
+const renderPanel = (overrides: { isFavourited?: boolean; onFavouriteToggle?: () => void; onClose?: () => void } = {}) =>
+  render(
+    <RecipeDetailPanel
+      recipe={mockRecipe}
+      onClose={overrides.onClose ?? vi.fn()}
+      isFavourited={overrides.isFavourited ?? false}
+      onFavouriteToggle={overrides.onFavouriteToggle ?? vi.fn()}
+    />
+  );
+
 describe('RecipeDetailPanel', () => {
   it('displays the recipe title', () => {
-    render(<RecipeDetailPanel recipe={mockRecipe} onClose={vi.fn()} />);
+    renderPanel();
 
     expect(screen.getByRole('heading', { name: 'Sugar Free Banana Bread' })).toBeInTheDocument();
   });
 
   it('displays the author', () => {
-    render(<RecipeDetailPanel recipe={mockRecipe} onClose={vi.fn()} />);
+    renderPanel();
 
     expect(screen.getByText('By Jane Doe')).toBeInTheDocument();
   });
 
   it('displays all ingredients', () => {
-    render(<RecipeDetailPanel recipe={mockRecipe} onClose={vi.fn()} />);
+    renderPanel();
 
     expect(screen.getByText('Banana')).toBeInTheDocument();
     expect(screen.getByText('Egg')).toBeInTheDocument();
@@ -45,46 +55,61 @@ describe('RecipeDetailPanel', () => {
   });
 
   it('displays the category', () => {
-    render(<RecipeDetailPanel recipe={mockRecipe} onClose={vi.fn()} />);
+    renderPanel();
 
     expect(screen.getByText('Dessert')).toBeInTheDocument();
   });
 
   it('displays the cook time', () => {
-    render(<RecipeDetailPanel recipe={mockRecipe} onClose={vi.fn()} />);
+    renderPanel();
 
     expect(screen.getByText('60 mins')).toBeInTheDocument();
   });
 
   it('displays the prep time', () => {
-    render(<RecipeDetailPanel recipe={mockRecipe} onClose={vi.fn()} />);
+    renderPanel();
 
     expect(screen.getByText('15 mins')).toBeInTheDocument();
   });
 
   it('displays the rating', () => {
-    render(<RecipeDetailPanel recipe={mockRecipe} onClose={vi.fn()} />);
+    renderPanel();
 
     expect(screen.getByText('4.5')).toBeInTheDocument();
   });
 
   it('calls onClose when the close button is clicked', () => {
     const onClose = vi.fn();
-    render(<RecipeDetailPanel recipe={mockRecipe} onClose={onClose} />);
+    renderPanel({ onClose });
 
     fireEvent.click(screen.getByRole('button', { name: 'Close details' }));
 
     expect(onClose).toHaveBeenCalledOnce();
   });
 
-  it('shows the save to favourites button', () => {
-    render(<RecipeDetailPanel recipe={mockRecipe} onClose={vi.fn()} />);
+  it('shows the save to favourites button when not favourited', () => {
+    renderPanel({ isFavourited: false });
 
     expect(screen.getByRole('button', { name: 'Save to favourites' })).toBeInTheDocument();
   });
 
-  it('shows a saved notification when the favourites button is clicked', () => {
-    render(<RecipeDetailPanel recipe={mockRecipe} onClose={vi.fn()} />);
+  it('shows the remove from favourites button when already favourited', () => {
+    renderPanel({ isFavourited: true });
+
+    expect(screen.getByRole('button', { name: 'Remove from favourites' })).toBeInTheDocument();
+  });
+
+  it('calls onFavouriteToggle when the favourite button is clicked', () => {
+    const onFavouriteToggle = vi.fn();
+    renderPanel({ onFavouriteToggle });
+
+    fireEvent.click(screen.getByRole('button', { name: 'Save to favourites' }));
+
+    expect(onFavouriteToggle).toHaveBeenCalledOnce();
+  });
+
+  it('shows a saved notification when adding to favourites', () => {
+    renderPanel({ isFavourited: false });
 
     expect(screen.queryByRole('status')).not.toBeInTheDocument();
 
@@ -93,17 +118,16 @@ describe('RecipeDetailPanel', () => {
     expect(screen.getByRole('status')).toHaveTextContent('Your recipe has been saved to your favourites.');
   });
 
-  it('shows a removed notification when the favourites button is clicked again', () => {
-    render(<RecipeDetailPanel recipe={mockRecipe} onClose={vi.fn()} />);
+  it('shows a removed notification when removing from favourites', () => {
+    renderPanel({ isFavourited: true });
 
-    fireEvent.click(screen.getByRole('button', { name: 'Save to favourites' }));
     fireEvent.click(screen.getByRole('button', { name: 'Remove from favourites' }));
 
     expect(screen.getByRole('status')).toHaveTextContent('This recipe has been removed from your list of favourites.');
   });
 
   it('dismisses the notification when the close notification button is clicked', () => {
-    render(<RecipeDetailPanel recipe={mockRecipe} onClose={vi.fn()} />);
+    renderPanel({ isFavourited: false });
 
     fireEvent.click(screen.getByRole('button', { name: 'Save to favourites' }));
     expect(screen.getByRole('status')).toBeInTheDocument();

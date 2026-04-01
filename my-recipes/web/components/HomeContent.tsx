@@ -4,6 +4,7 @@ import { useSearchParams, useRouter } from "next/navigation";
 import SearchBar from "./SearchBar";
 import React, { useState, useMemo, useEffect, useRef } from "react";
 import { useRecipes } from "../hooks/useRecipes";
+import { useFavourites } from "../hooks/useFavourites";
 import useWindowSize from "../hooks/useWindowSize";
 import Recipe from "./Recipe";
 import Pagination from "./Pagination";
@@ -21,6 +22,7 @@ export default function HomeContent() {
 
   const { width } = useWindowSize();
   const isMobile = width !== undefined && width < 640;
+  const { favouriteIds, addFavourite, removeFavourite } = useFavourites();
 
   const [selectedRecipeId, setSelectedRecipeId] = useState<number | null>(null);
 
@@ -183,6 +185,12 @@ export default function HomeContent() {
                   setSelectedRecipeId((prev) =>
                     prev === recipe.id ? null : recipe.id,
                   )
+                }
+                isFavourited={favouriteIds.has(recipe.id)}
+                onFavouriteToggle={
+                  favouriteIds.has(recipe.id)
+                    ? () => removeFavourite(recipe.id)
+                    : () => addFavourite(recipe.id)
                 }
               />
             ))

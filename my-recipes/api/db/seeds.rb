@@ -11,6 +11,10 @@
 
 require "json"
 
+# --- Default user (temporary until authentication is implemented) ---
+User.find_or_create_by!(email: "default@myrecipes.com")
+puts("Default user ready: #{User.find_by!(email: "default@myrecipes.com").id}")
+
 # --- Configuration ---
 BATCH_SIZE = 1_000
 file_path = Rails.root.join("db", "data", "recipes-en.json")

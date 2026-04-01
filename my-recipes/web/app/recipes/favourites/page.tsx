@@ -2,10 +2,12 @@
 
 import { useState } from "react";
 import Recipe from "../../../components/Recipe";
-import mockFavouriteRecipes from "./mockRecipes";
+import { useFavourites } from "../../../hooks/useFavourites";
 
 export default function Favourites() {
   const [selectedRecipeId, setSelectedRecipeId] = useState<number | null>(null);
+  const { favouriteIds, favouriteRecipes, addFavourite, removeFavourite } = useFavourites();
+
   return (
     <div className="min-h-screen bg-stone-50 flex flex-col">
       <main className="grow max-w-6xl mx-auto px-6 sm:px-8 lg:px-12 py-12 w-full">
@@ -26,8 +28,8 @@ export default function Favourites() {
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10 grid-flow-row-dense">
-          {mockFavouriteRecipes.length > 0 ? (
-            mockFavouriteRecipes.map((recipe) => (
+          {favouriteRecipes.length > 0 ? (
+            favouriteRecipes.map((recipe) => (
               <Recipe
                 key={recipe.id}
                 recipe={recipe}
@@ -36,6 +38,12 @@ export default function Favourites() {
                   setSelectedRecipeId((prev) =>
                     prev === recipe.id ? null : recipe.id
                   )
+                }
+                isFavourited={favouriteIds.has(recipe.id)}
+                onFavouriteToggle={
+                  favouriteIds.has(recipe.id)
+                    ? () => removeFavourite(recipe.id)
+                    : () => addFavourite(recipe.id)
                 }
               />
             ))
