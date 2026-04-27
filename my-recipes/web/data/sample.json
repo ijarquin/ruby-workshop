@@ -1,0 +1,1316 @@
+{
+  "events": [
+    {
+      "id": "evt_1",
+      "name": "Warehouse Club Night",
+      "city": "Manchester",
+      "startsAt": "2026-05-08T22:00:00.000Z"
+    },
+    {
+      "id": "evt_2",
+      "name": "Summer City Festival",
+      "city": "Bristol",
+      "startsAt": "2026-06-20T12:00:00.000Z"
+    },
+    {
+      "id": "evt_3",
+      "name": "Rooftop House Sessions",
+      "city": "London",
+      "startsAt": "2026-04-18T18:30:00.000Z"
+    }
+  ],
+  "sales": [
+    {
+      "eventId": "evt_1",
+      "date": "2026-03-27",
+      "ticketsSold": 80
+    },
+    {
+      "eventId": "evt_1",
+      "date": "2026-03-28",
+      "ticketsSold": 211
+    },
+    {
+      "eventId": "evt_1",
+      "date": "2026-03-29",
+      "ticketsSold": 208
+    },
+    {
+      "eventId": "evt_1",
+      "date": "2026-03-30",
+      "ticketsSold": 80
+    },
+    {
+      "eventId": "evt_1",
+      "date": "2026-03-31",
+      "ticketsSold": 83
+    },
+    {
+      "eventId": "evt_1",
+      "date": "2026-04-01",
+      "ticketsSold": 86
+    },
+    {
+      "eventId": "evt_1",
+      "date": "2026-04-02",
+      "ticketsSold": 93
+    },
+    {
+      "eventId": "evt_1",
+      "date": "2026-04-03",
+      "ticketsSold": 101
+    },
+    {
+      "eventId": "evt_1",
+      "date": "2026-04-04",
+      "ticketsSold": 232
+    },
+    {
+      "eventId": "evt_1",
+      "date": "2026-04-05",
+      "ticketsSold": 229
+    },
+    {
+      "eventId": "evt_1",
+      "date": "2026-04-06",
+      "ticketsSold": 101
+    },
+    {
+      "eventId": "evt_1",
+      "date": "2026-04-07",
+      "ticketsSold": 104
+    },
+    {
+      "eventId": "evt_1",
+      "date": "2026-04-08",
+      "ticketsSold": 107
+    },
+    {
+      "eventId": "evt_1",
+      "date": "2026-04-09",
+      "ticketsSold": 114
+    },
+    {
+      "eventId": "evt_1",
+      "date": "2026-04-10",
+      "ticketsSold": 122
+    },
+    {
+      "eventId": "evt_1",
+      "date": "2026-04-11",
+      "ticketsSold": 253
+    },
+    {
+      "eventId": "evt_1",
+      "date": "2026-04-12",
+      "ticketsSold": 250
+    },
+    {
+      "eventId": "evt_1",
+      "date": "2026-04-13",
+      "ticketsSold": 122
+    },
+    {
+      "eventId": "evt_1",
+      "date": "2026-04-14",
+      "ticketsSold": 125
+    },
+    {
+      "eventId": "evt_1",
+      "date": "2026-04-15",
+      "ticketsSold": 128
+    },
+    {
+      "eventId": "evt_1",
+      "date": "2026-04-16",
+      "ticketsSold": 135
+    },
+    {
+      "eventId": "evt_1",
+      "date": "2026-04-17",
+      "ticketsSold": 143
+    },
+    {
+      "eventId": "evt_1",
+      "date": "2026-04-18",
+      "ticketsSold": 274
+    },
+    {
+      "eventId": "evt_1",
+      "date": "2026-04-19",
+      "ticketsSold": 271
+    },
+    {
+      "eventId": "evt_1",
+      "date": "2026-04-20",
+      "ticketsSold": 143
+    },
+    {
+      "eventId": "evt_1",
+      "date": "2026-04-21",
+      "ticketsSold": 146
+    },
+    {
+      "eventId": "evt_1",
+      "date": "2026-04-22",
+      "ticketsSold": 149
+    },
+    {
+      "eventId": "evt_1",
+      "date": "2026-04-23",
+      "ticketsSold": 156
+    },
+    {
+      "eventId": "evt_1",
+      "date": "2026-04-24",
+      "ticketsSold": 164
+    },
+    {
+      "eventId": "evt_1",
+      "date": "2026-04-25",
+      "ticketsSold": 295
+    },
+    {
+      "eventId": "evt_1",
+      "date": "2026-04-26",
+      "ticketsSold": 292
+    },
+    {
+      "eventId": "evt_1",
+      "date": "2026-04-27",
+      "ticketsSold": 164
+    },
+    {
+      "eventId": "evt_1",
+      "date": "2026-04-28",
+      "ticketsSold": 167
+    },
+    {
+      "eventId": "evt_1",
+      "date": "2026-04-29",
+      "ticketsSold": 170
+    },
+    {
+      "eventId": "evt_1",
+      "date": "2026-04-30",
+      "ticketsSold": 177
+    },
+    {
+      "eventId": "evt_1",
+      "date": "2026-05-01",
+      "ticketsSold": 185
+    },
+    {
+      "eventId": "evt_1",
+      "date": "2026-05-02",
+      "ticketsSold": 316
+    },
+    {
+      "eventId": "evt_1",
+      "date": "2026-05-03",
+      "ticketsSold": 313
+    },
+    {
+      "eventId": "evt_1",
+      "date": "2026-05-04",
+      "ticketsSold": 185
+    },
+    {
+      "eventId": "evt_1",
+      "date": "2026-05-05",
+      "ticketsSold": 188
+    },
+    {
+      "eventId": "evt_1",
+      "date": "2026-05-06",
+      "ticketsSold": 191
+    },
+    {
+      "eventId": "evt_1",
+      "date": "2026-05-07",
+      "ticketsSold": 198
+    },
+    {
+      "eventId": "evt_1",
+      "date": "2026-05-08",
+      "ticketsSold": 206
+    },
+    {
+      "eventId": "evt_2",
+      "date": "2026-05-09",
+      "ticketsSold": 134
+    },
+    {
+      "eventId": "evt_2",
+      "date": "2026-05-10",
+      "ticketsSold": 133
+    },
+    {
+      "eventId": "evt_2",
+      "date": "2026-05-11",
+      "ticketsSold": 41
+    },
+    {
+      "eventId": "evt_2",
+      "date": "2026-05-12",
+      "ticketsSold": 46
+    },
+    {
+      "eventId": "evt_2",
+      "date": "2026-05-13",
+      "ticketsSold": 48
+    },
+    {
+      "eventId": "evt_2",
+      "date": "2026-05-14",
+      "ticketsSold": 51
+    },
+    {
+      "eventId": "evt_2",
+      "date": "2026-05-15",
+      "ticketsSold": 61
+    },
+    {
+      "eventId": "evt_2",
+      "date": "2026-05-16",
+      "ticketsSold": 148
+    },
+    {
+      "eventId": "evt_2",
+      "date": "2026-05-17",
+      "ticketsSold": 147
+    },
+    {
+      "eventId": "evt_2",
+      "date": "2026-05-18",
+      "ticketsSold": 55
+    },
+    {
+      "eventId": "evt_2",
+      "date": "2026-05-19",
+      "ticketsSold": 60
+    },
+    {
+      "eventId": "evt_2",
+      "date": "2026-05-20",
+      "ticketsSold": 62
+    },
+    {
+      "eventId": "evt_2",
+      "date": "2026-05-21",
+      "ticketsSold": 65
+    },
+    {
+      "eventId": "evt_2",
+      "date": "2026-05-22",
+      "ticketsSold": 75
+    },
+    {
+      "eventId": "evt_2",
+      "date": "2026-05-23",
+      "ticketsSold": 162
+    },
+    {
+      "eventId": "evt_2",
+      "date": "2026-05-24",
+      "ticketsSold": 161
+    },
+    {
+      "eventId": "evt_2",
+      "date": "2026-05-25",
+      "ticketsSold": 69
+    },
+    {
+      "eventId": "evt_2",
+      "date": "2026-05-26",
+      "ticketsSold": 74
+    },
+    {
+      "eventId": "evt_2",
+      "date": "2026-05-27",
+      "ticketsSold": 76
+    },
+    {
+      "eventId": "evt_2",
+      "date": "2026-05-28",
+      "ticketsSold": 79
+    },
+    {
+      "eventId": "evt_2",
+      "date": "2026-05-29",
+      "ticketsSold": 89
+    },
+    {
+      "eventId": "evt_2",
+      "date": "2026-05-30",
+      "ticketsSold": 176
+    },
+    {
+      "eventId": "evt_2",
+      "date": "2026-05-31",
+      "ticketsSold": 175
+    },
+    {
+      "eventId": "evt_2",
+      "date": "2026-06-01",
+      "ticketsSold": 83
+    },
+    {
+      "eventId": "evt_2",
+      "date": "2026-06-02",
+      "ticketsSold": 88
+    },
+    {
+      "eventId": "evt_2",
+      "date": "2026-06-03",
+      "ticketsSold": 90
+    },
+    {
+      "eventId": "evt_2",
+      "date": "2026-06-04",
+      "ticketsSold": 93
+    },
+    {
+      "eventId": "evt_2",
+      "date": "2026-06-05",
+      "ticketsSold": 103
+    },
+    {
+      "eventId": "evt_2",
+      "date": "2026-06-06",
+      "ticketsSold": 190
+    },
+    {
+      "eventId": "evt_2",
+      "date": "2026-06-07",
+      "ticketsSold": 189
+    },
+    {
+      "eventId": "evt_2",
+      "date": "2026-06-08",
+      "ticketsSold": 97
+    },
+    {
+      "eventId": "evt_2",
+      "date": "2026-06-09",
+      "ticketsSold": 102
+    },
+    {
+      "eventId": "evt_2",
+      "date": "2026-06-10",
+      "ticketsSold": 104
+    },
+    {
+      "eventId": "evt_2",
+      "date": "2026-06-11",
+      "ticketsSold": 107
+    },
+    {
+      "eventId": "evt_2",
+      "date": "2026-06-12",
+      "ticketsSold": 117
+    },
+    {
+      "eventId": "evt_2",
+      "date": "2026-06-13",
+      "ticketsSold": 204
+    },
+    {
+      "eventId": "evt_2",
+      "date": "2026-06-14",
+      "ticketsSold": 203
+    },
+    {
+      "eventId": "evt_2",
+      "date": "2026-06-15",
+      "ticketsSold": 111
+    },
+    {
+      "eventId": "evt_2",
+      "date": "2026-06-16",
+      "ticketsSold": 116
+    },
+    {
+      "eventId": "evt_2",
+      "date": "2026-06-17",
+      "ticketsSold": 118
+    },
+    {
+      "eventId": "evt_2",
+      "date": "2026-06-18",
+      "ticketsSold": 121
+    },
+    {
+      "eventId": "evt_2",
+      "date": "2026-06-19",
+      "ticketsSold": 131
+    },
+    {
+      "eventId": "evt_2",
+      "date": "2026-06-20",
+      "ticketsSold": 218
+    },
+    {
+      "eventId": "evt_3",
+      "date": "2026-03-07",
+      "ticketsSold": 265
+    },
+    {
+      "eventId": "evt_3",
+      "date": "2026-03-08",
+      "ticketsSold": 266
+    },
+    {
+      "eventId": "evt_3",
+      "date": "2026-03-09",
+      "ticketsSold": 95
+    },
+    {
+      "eventId": "evt_3",
+      "date": "2026-03-10",
+      "ticketsSold": 102
+    },
+    {
+      "eventId": "evt_3",
+      "date": "2026-03-11",
+      "ticketsSold": 106
+    },
+    {
+      "eventId": "evt_3",
+      "date": "2026-03-12",
+      "ticketsSold": 111
+    },
+    {
+      "eventId": "evt_3",
+      "date": "2026-03-13",
+      "ticketsSold": 123
+    },
+    {
+      "eventId": "evt_3",
+      "date": "2026-03-14",
+      "ticketsSold": 293
+    },
+    {
+      "eventId": "evt_3",
+      "date": "2026-03-15",
+      "ticketsSold": 294
+    },
+    {
+      "eventId": "evt_3",
+      "date": "2026-03-16",
+      "ticketsSold": 123
+    },
+    {
+      "eventId": "evt_3",
+      "date": "2026-03-17",
+      "ticketsSold": 130
+    },
+    {
+      "eventId": "evt_3",
+      "date": "2026-03-18",
+      "ticketsSold": 134
+    },
+    {
+      "eventId": "evt_3",
+      "date": "2026-03-19",
+      "ticketsSold": 139
+    },
+    {
+      "eventId": "evt_3",
+      "date": "2026-03-20",
+      "ticketsSold": 151
+    },
+    {
+      "eventId": "evt_3",
+      "date": "2026-03-21",
+      "ticketsSold": 321
+    },
+    {
+      "eventId": "evt_3",
+      "date": "2026-03-22",
+      "ticketsSold": 322
+    },
+    {
+      "eventId": "evt_3",
+      "date": "2026-03-23",
+      "ticketsSold": 151
+    },
+    {
+      "eventId": "evt_3",
+      "date": "2026-03-24",
+      "ticketsSold": 158
+    },
+    {
+      "eventId": "evt_3",
+      "date": "2026-03-25",
+      "ticketsSold": 162
+    },
+    {
+      "eventId": "evt_3",
+      "date": "2026-03-26",
+      "ticketsSold": 167
+    },
+    {
+      "eventId": "evt_3",
+      "date": "2026-03-27",
+      "ticketsSold": 179
+    },
+    {
+      "eventId": "evt_3",
+      "date": "2026-03-28",
+      "ticketsSold": 349
+    },
+    {
+      "eventId": "evt_3",
+      "date": "2026-03-29",
+      "ticketsSold": 350
+    },
+    {
+      "eventId": "evt_3",
+      "date": "2026-03-30",
+      "ticketsSold": 179
+    },
+    {
+      "eventId": "evt_3",
+      "date": "2026-03-31",
+      "ticketsSold": 186
+    },
+    {
+      "eventId": "evt_3",
+      "date": "2026-04-01",
+      "ticketsSold": 190
+    },
+    {
+      "eventId": "evt_3",
+      "date": "2026-04-02",
+      "ticketsSold": 195
+    },
+    {
+      "eventId": "evt_3",
+      "date": "2026-04-03",
+      "ticketsSold": 207
+    },
+    {
+      "eventId": "evt_3",
+      "date": "2026-04-04",
+      "ticketsSold": 377
+    },
+    {
+      "eventId": "evt_3",
+      "date": "2026-04-05",
+      "ticketsSold": 378
+    },
+    {
+      "eventId": "evt_3",
+      "date": "2026-04-06",
+      "ticketsSold": 207
+    },
+    {
+      "eventId": "evt_3",
+      "date": "2026-04-07",
+      "ticketsSold": 214
+    },
+    {
+      "eventId": "evt_3",
+      "date": "2026-04-08",
+      "ticketsSold": 218
+    },
+    {
+      "eventId": "evt_3",
+      "date": "2026-04-09",
+      "ticketsSold": 223
+    },
+    {
+      "eventId": "evt_3",
+      "date": "2026-04-10",
+      "ticketsSold": 235
+    },
+    {
+      "eventId": "evt_3",
+      "date": "2026-04-11",
+      "ticketsSold": 405
+    },
+    {
+      "eventId": "evt_3",
+      "date": "2026-04-12",
+      "ticketsSold": 406
+    },
+    {
+      "eventId": "evt_3",
+      "date": "2026-04-13",
+      "ticketsSold": 235
+    },
+    {
+      "eventId": "evt_3",
+      "date": "2026-04-14",
+      "ticketsSold": 242
+    },
+    {
+      "eventId": "evt_3",
+      "date": "2026-04-15",
+      "ticketsSold": 246
+    },
+    {
+      "eventId": "evt_3",
+      "date": "2026-04-16",
+      "ticketsSold": 251
+    },
+    {
+      "eventId": "evt_3",
+      "date": "2026-04-17",
+      "ticketsSold": 263
+    },
+    {
+      "eventId": "evt_3",
+      "date": "2026-04-18",
+      "ticketsSold": 433
+    }
+  ],
+  "views": [
+    {
+      "eventId": "evt_1",
+      "date": "2026-03-27",
+      "views": 480
+    },
+    {
+      "eventId": "evt_1",
+      "date": "2026-03-28",
+      "views": 1284
+    },
+    {
+      "eventId": "evt_1",
+      "date": "2026-03-29",
+      "views": 1266
+    },
+    {
+      "eventId": "evt_1",
+      "date": "2026-03-30",
+      "views": 480
+    },
+    {
+      "eventId": "evt_1",
+      "date": "2026-03-31",
+      "views": 498
+    },
+    {
+      "eventId": "evt_1",
+      "date": "2026-04-01",
+      "views": 516
+    },
+    {
+      "eventId": "evt_1",
+      "date": "2026-04-02",
+      "views": 558
+    },
+    {
+      "eventId": "evt_1",
+      "date": "2026-04-03",
+      "views": 606
+    },
+    {
+      "eventId": "evt_1",
+      "date": "2026-04-04",
+      "views": 1410
+    },
+    {
+      "eventId": "evt_1",
+      "date": "2026-04-05",
+      "views": 1392
+    },
+    {
+      "eventId": "evt_1",
+      "date": "2026-04-06",
+      "views": 606
+    },
+    {
+      "eventId": "evt_1",
+      "date": "2026-04-07",
+      "views": 624
+    },
+    {
+      "eventId": "evt_1",
+      "date": "2026-04-08",
+      "views": 642
+    },
+    {
+      "eventId": "evt_1",
+      "date": "2026-04-09",
+      "views": 684
+    },
+    {
+      "eventId": "evt_1",
+      "date": "2026-04-10",
+      "views": 732
+    },
+    {
+      "eventId": "evt_1",
+      "date": "2026-04-11",
+      "views": 1536
+    },
+    {
+      "eventId": "evt_1",
+      "date": "2026-04-12",
+      "views": 1518
+    },
+    {
+      "eventId": "evt_1",
+      "date": "2026-04-13",
+      "views": 732
+    },
+    {
+      "eventId": "evt_1",
+      "date": "2026-04-14",
+      "views": 750
+    },
+    {
+      "eventId": "evt_1",
+      "date": "2026-04-15",
+      "views": 768
+    },
+    {
+      "eventId": "evt_1",
+      "date": "2026-04-16",
+      "views": 810
+    },
+    {
+      "eventId": "evt_1",
+      "date": "2026-04-17",
+      "views": 858
+    },
+    {
+      "eventId": "evt_1",
+      "date": "2026-04-18",
+      "views": 1662
+    },
+    {
+      "eventId": "evt_1",
+      "date": "2026-04-19",
+      "views": 1644
+    },
+    {
+      "eventId": "evt_1",
+      "date": "2026-04-20",
+      "views": 858
+    },
+    {
+      "eventId": "evt_1",
+      "date": "2026-04-21",
+      "views": 876
+    },
+    {
+      "eventId": "evt_1",
+      "date": "2026-04-22",
+      "views": 894
+    },
+    {
+      "eventId": "evt_1",
+      "date": "2026-04-23",
+      "views": 936
+    },
+    {
+      "eventId": "evt_1",
+      "date": "2026-04-24",
+      "views": 984
+    },
+    {
+      "eventId": "evt_1",
+      "date": "2026-04-25",
+      "views": 1788
+    },
+    {
+      "eventId": "evt_1",
+      "date": "2026-04-26",
+      "views": 1770
+    },
+    {
+      "eventId": "evt_1",
+      "date": "2026-04-27",
+      "views": 984
+    },
+    {
+      "eventId": "evt_1",
+      "date": "2026-04-28",
+      "views": 1002
+    },
+    {
+      "eventId": "evt_1",
+      "date": "2026-04-29",
+      "views": 1020
+    },
+    {
+      "eventId": "evt_1",
+      "date": "2026-04-30",
+      "views": 1062
+    },
+    {
+      "eventId": "evt_1",
+      "date": "2026-05-01",
+      "views": 1110
+    },
+    {
+      "eventId": "evt_1",
+      "date": "2026-05-02",
+      "views": 1914
+    },
+    {
+      "eventId": "evt_1",
+      "date": "2026-05-03",
+      "views": 1896
+    },
+    {
+      "eventId": "evt_1",
+      "date": "2026-05-04",
+      "views": 1110
+    },
+    {
+      "eventId": "evt_1",
+      "date": "2026-05-05",
+      "views": 1128
+    },
+    {
+      "eventId": "evt_1",
+      "date": "2026-05-06",
+      "views": 1146
+    },
+    {
+      "eventId": "evt_1",
+      "date": "2026-05-07",
+      "views": 1188
+    },
+    {
+      "eventId": "evt_1",
+      "date": "2026-05-08",
+      "views": 1236
+    },
+    {
+      "eventId": "evt_2",
+      "date": "2026-05-09",
+      "views": 983
+    },
+    {
+      "eventId": "evt_2",
+      "date": "2026-05-10",
+      "views": 976
+    },
+    {
+      "eventId": "evt_2",
+      "date": "2026-05-11",
+      "views": 295
+    },
+    {
+      "eventId": "evt_2",
+      "date": "2026-05-12",
+      "views": 331
+    },
+    {
+      "eventId": "evt_2",
+      "date": "2026-05-13",
+      "views": 346
+    },
+    {
+      "eventId": "evt_2",
+      "date": "2026-05-14",
+      "views": 367
+    },
+    {
+      "eventId": "evt_2",
+      "date": "2026-05-15",
+      "views": 439
+    },
+    {
+      "eventId": "evt_2",
+      "date": "2026-05-16",
+      "views": 1084
+    },
+    {
+      "eventId": "evt_2",
+      "date": "2026-05-17",
+      "views": 1076
+    },
+    {
+      "eventId": "evt_2",
+      "date": "2026-05-18",
+      "views": 396
+    },
+    {
+      "eventId": "evt_2",
+      "date": "2026-05-19",
+      "views": 432
+    },
+    {
+      "eventId": "evt_2",
+      "date": "2026-05-20",
+      "views": 446
+    },
+    {
+      "eventId": "evt_2",
+      "date": "2026-05-21",
+      "views": 468
+    },
+    {
+      "eventId": "evt_2",
+      "date": "2026-05-22",
+      "views": 540
+    },
+    {
+      "eventId": "evt_2",
+      "date": "2026-05-23",
+      "views": 1184
+    },
+    {
+      "eventId": "evt_2",
+      "date": "2026-05-24",
+      "views": 1177
+    },
+    {
+      "eventId": "evt_2",
+      "date": "2026-05-25",
+      "views": 497
+    },
+    {
+      "eventId": "evt_2",
+      "date": "2026-05-26",
+      "views": 533
+    },
+    {
+      "eventId": "evt_2",
+      "date": "2026-05-27",
+      "views": 547
+    },
+    {
+      "eventId": "evt_2",
+      "date": "2026-05-28",
+      "views": 569
+    },
+    {
+      "eventId": "evt_2",
+      "date": "2026-05-29",
+      "views": 641
+    },
+    {
+      "eventId": "evt_2",
+      "date": "2026-05-30",
+      "views": 1285
+    },
+    {
+      "eventId": "evt_2",
+      "date": "2026-05-31",
+      "views": 1278
+    },
+    {
+      "eventId": "evt_2",
+      "date": "2026-06-01",
+      "views": 598
+    },
+    {
+      "eventId": "evt_2",
+      "date": "2026-06-02",
+      "views": 634
+    },
+    {
+      "eventId": "evt_2",
+      "date": "2026-06-03",
+      "views": 648
+    },
+    {
+      "eventId": "evt_2",
+      "date": "2026-06-04",
+      "views": 670
+    },
+    {
+      "eventId": "evt_2",
+      "date": "2026-06-05",
+      "views": 742
+    },
+    {
+      "eventId": "evt_2",
+      "date": "2026-06-06",
+      "views": 1386
+    },
+    {
+      "eventId": "evt_2",
+      "date": "2026-06-07",
+      "views": 1379
+    },
+    {
+      "eventId": "evt_2",
+      "date": "2026-06-08",
+      "views": 698
+    },
+    {
+      "eventId": "evt_2",
+      "date": "2026-06-09",
+      "views": 734
+    },
+    {
+      "eventId": "evt_2",
+      "date": "2026-06-10",
+      "views": 749
+    },
+    {
+      "eventId": "evt_2",
+      "date": "2026-06-11",
+      "views": 770
+    },
+    {
+      "eventId": "evt_2",
+      "date": "2026-06-12",
+      "views": 842
+    },
+    {
+      "eventId": "evt_2",
+      "date": "2026-06-13",
+      "views": 1487
+    },
+    {
+      "eventId": "evt_2",
+      "date": "2026-06-14",
+      "views": 1480
+    },
+    {
+      "eventId": "evt_2",
+      "date": "2026-06-15",
+      "views": 799
+    },
+    {
+      "eventId": "evt_2",
+      "date": "2026-06-16",
+      "views": 835
+    },
+    {
+      "eventId": "evt_2",
+      "date": "2026-06-17",
+      "views": 850
+    },
+    {
+      "eventId": "evt_2",
+      "date": "2026-06-18",
+      "views": 871
+    },
+    {
+      "eventId": "evt_2",
+      "date": "2026-06-19",
+      "views": 943
+    },
+    {
+      "eventId": "evt_2",
+      "date": "2026-06-20",
+      "views": 1588
+    },
+    {
+      "eventId": "evt_3",
+      "date": "2026-03-07",
+      "views": 1449
+    },
+    {
+      "eventId": "evt_3",
+      "date": "2026-03-08",
+      "views": 1454
+    },
+    {
+      "eventId": "evt_3",
+      "date": "2026-03-09",
+      "views": 513
+    },
+    {
+      "eventId": "evt_3",
+      "date": "2026-03-10",
+      "views": 551
+    },
+    {
+      "eventId": "evt_3",
+      "date": "2026-03-11",
+      "views": 572
+    },
+    {
+      "eventId": "evt_3",
+      "date": "2026-03-12",
+      "views": 599
+    },
+    {
+      "eventId": "evt_3",
+      "date": "2026-03-13",
+      "views": 664
+    },
+    {
+      "eventId": "evt_3",
+      "date": "2026-03-14",
+      "views": 1600
+    },
+    {
+      "eventId": "evt_3",
+      "date": "2026-03-15",
+      "views": 1606
+    },
+    {
+      "eventId": "evt_3",
+      "date": "2026-03-16",
+      "views": 664
+    },
+    {
+      "eventId": "evt_3",
+      "date": "2026-03-17",
+      "views": 702
+    },
+    {
+      "eventId": "evt_3",
+      "date": "2026-03-18",
+      "views": 724
+    },
+    {
+      "eventId": "evt_3",
+      "date": "2026-03-19",
+      "views": 751
+    },
+    {
+      "eventId": "evt_3",
+      "date": "2026-03-20",
+      "views": 815
+    },
+    {
+      "eventId": "evt_3",
+      "date": "2026-03-21",
+      "views": 1751
+    },
+    {
+      "eventId": "evt_3",
+      "date": "2026-03-22",
+      "views": 1757
+    },
+    {
+      "eventId": "evt_3",
+      "date": "2026-03-23",
+      "views": 815
+    },
+    {
+      "eventId": "evt_3",
+      "date": "2026-03-24",
+      "views": 853
+    },
+    {
+      "eventId": "evt_3",
+      "date": "2026-03-25",
+      "views": 875
+    },
+    {
+      "eventId": "evt_3",
+      "date": "2026-03-26",
+      "views": 902
+    },
+    {
+      "eventId": "evt_3",
+      "date": "2026-03-27",
+      "views": 967
+    },
+    {
+      "eventId": "evt_3",
+      "date": "2026-03-28",
+      "views": 1903
+    },
+    {
+      "eventId": "evt_3",
+      "date": "2026-03-29",
+      "views": 1908
+    },
+    {
+      "eventId": "evt_3",
+      "date": "2026-03-30",
+      "views": 967
+    },
+    {
+      "eventId": "evt_3",
+      "date": "2026-03-31",
+      "views": 1004
+    },
+    {
+      "eventId": "evt_3",
+      "date": "2026-04-01",
+      "views": 1026
+    },
+    {
+      "eventId": "evt_3",
+      "date": "2026-04-02",
+      "views": 1053
+    },
+    {
+      "eventId": "evt_3",
+      "date": "2026-04-03",
+      "views": 1118
+    },
+    {
+      "eventId": "evt_3",
+      "date": "2026-04-04",
+      "views": 2054
+    },
+    {
+      "eventId": "evt_3",
+      "date": "2026-04-05",
+      "views": 2059
+    },
+    {
+      "eventId": "evt_3",
+      "date": "2026-04-06",
+      "views": 1118
+    },
+    {
+      "eventId": "evt_3",
+      "date": "2026-04-07",
+      "views": 1156
+    },
+    {
+      "eventId": "evt_3",
+      "date": "2026-04-08",
+      "views": 1177
+    },
+    {
+      "eventId": "evt_3",
+      "date": "2026-04-09",
+      "views": 1204
+    },
+    {
+      "eventId": "evt_3",
+      "date": "2026-04-10",
+      "views": 1269
+    },
+    {
+      "eventId": "evt_3",
+      "date": "2026-04-11",
+      "views": 2205
+    },
+    {
+      "eventId": "evt_3",
+      "date": "2026-04-12",
+      "views": 2210
+    },
+    {
+      "eventId": "evt_3",
+      "date": "2026-04-13",
+      "views": 1269
+    },
+    {
+      "eventId": "evt_3",
+      "date": "2026-04-14",
+      "views": 1307
+    },
+    {
+      "eventId": "evt_3",
+      "date": "2026-04-15",
+      "views": 1328
+    },
+    {
+      "eventId": "evt_3",
+      "date": "2026-04-16",
+      "views": 1355
+    },
+    {
+      "eventId": "evt_3",
+      "date": "2026-04-17",
+      "views": 1420
+    },
+    {
+      "eventId": "evt_3",
+      "date": "2026-04-18",
+      "views": 2356
+    }
+  ]
+}
